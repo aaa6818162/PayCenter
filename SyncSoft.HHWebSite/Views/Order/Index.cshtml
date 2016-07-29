@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Confirm", "Order", FormMethod.Post))
+        {
+            <select name="PayEnum">
+                <option value="PayCenter">支付平台</option>
+                <option value="Alipay">支付宝</option>
+                <option value="CmbBank">招商银行</option>
+                <option value="CommBank">交通银行</option>
+                <option value="IcbcBank">工商银行</option>
+                <option value="AlipayForMobile">支付宝手机</option>
+                <option value="Tenpay">财付通</option>
+            </select>
+            <input type="submit" id="btnSubmit" value="确认订单" />
+        }
+    </div>
+    @*<script type="text/javascript">
+            $(function() {
+
+                $("#btnSubmit").bind("click", function() {
+
+                    var msg = $.ajax({
+                        type: "POST",
+                        url: "/Order/Confirm",
+                        data: "orderNo=111",
+                        cache: false,
+                        async: false
+                    }).responseText;
+
+                   // var data = jQuery.parseJSON(msg);
+                });
+
+            });
+        </script>*@
+</body>
+</html>

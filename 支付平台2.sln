@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.PayCenter", "SyncSoft.PayCenter\SyncSoft.PayCenter.csproj", "{75AD24F4-0C64-4775-B86D-391769AF978C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.PayCenterSdk", "SyncSoft.PayCenterSdk\SyncSoft.PayCenterSdk.csproj", "{D1433471-966D-433F-8572-869DC226319F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.Payment", "SyncSoft.Payment\SyncSoft.Payment.csproj", "{671C01A8-EFDD-4B3D-87EF-9280007E9502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.HHWebSite", "SyncSoft.HHWebSite\SyncSoft.HHWebSite.csproj", "{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.PayCenterSdkSimple", "SyncSoft.PayCenterSdkSimple\SyncSoft.PayCenterSdkSimple.csproj", "{04CB3B08-7394-40BA-B5DB-7660F4873D16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PaySdk", "PaySdk", "{0231B44B-4AD4-4FA9-889B-FDBEEBFB6EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AopSdk", "PaySdk\AliPay\AopSdk.csproj", "{9C11CAE5-5188-4E71-825B-68FC3135728A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{6F6D7E2E-3616-45AA-B5AA-E63DB4E99BE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75AD24F4-0C64-4775-B86D-391769AF978C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AD24F4-0C64-4775-B86D-391769AF978C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AD24F4-0C64-4775-B86D-391769AF978C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AD24F4-0C64-4775-B86D-391769AF978C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1433471-966D-433F-8572-869DC226319F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1433471-966D-433F-8572-869DC226319F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1433471-966D-433F-8572-869DC226319F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1433471-966D-433F-8572-869DC226319F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04CB3B08-7394-40BA-B5DB-7660F4873D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04CB3B08-7394-40BA-B5DB-7660F4873D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04CB3B08-7394-40BA-B5DB-7660F4873D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04CB3B08-7394-40BA-B5DB-7660F4873D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C11CAE5-5188-4E71-825B-68FC3135728A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C11CAE5-5188-4E71-825B-68FC3135728A} = {0231B44B-4AD4-4FA9-889B-FDBEEBFB6EFC}
+	EndGlobalSection
+EndGlobal
