@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("ConfrimPay", "Portal", FormMethod.Post))
+        {
+            <div>
+                <input type="radio" name="PayType" value="Alipay" />Alipay
+                <input type="radio" name="PayType" value="IcbcBank"/>IcbcBank
+                <input type="radio" name="PayType" value="CommBank"/>CommBank
+                <input type="radio" name="PayType" value="CmbBank" />CmbBank
+                <input type="submit" id="btnSubmit" value="确认订单" />
+            </div>
+        }
+    </div>
+</body>
+
+
+
+
+</html>
