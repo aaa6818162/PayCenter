@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Payment.Business.Interface
 {
-    public interface ICmbBankAppBiz
+    /// <summary>
+    /// 移动端支付接口
+    /// </summary>
+    public interface IBaseAppPayBiz
     {
+
     }
 }

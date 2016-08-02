@@ -134,6 +134,10 @@
       <Project>{A33EB658-FF7B-47EC-82ED-226DF7EE26B8}</Project>
       <Name>PayCenterSdk</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SyncSoft.Payment\SyncSoft.Payment.csproj">
+      <Project>{671C01A8-EFDD-4B3D-87EF-9280007E9502}</Project>
+      <Name>SyncSoft.Payment</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

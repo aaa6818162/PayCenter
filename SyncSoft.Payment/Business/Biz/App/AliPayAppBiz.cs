@@ -1,11 +1,12 @@
-﻿using SyncSoft.Payment.Business.Interface;
+﻿using SyncSoft.Payment.Business.Biz.Base;
+using SyncSoft.Payment.Business.Interface;
 
-namespace SyncSoft.Payment.Business.Biz
+namespace SyncSoft.Payment.Business.Biz.App
 {
     /// <summary>
     /// 支付宝应用端接口
     /// </summary>
-    public class AliPayAppBiz : IAliPayAppBiz
+    public class AliPayAppBiz :BasePayBiz, IAliPayAppBiz
     {
         #region Implementation of IAliPayAppBiz
 

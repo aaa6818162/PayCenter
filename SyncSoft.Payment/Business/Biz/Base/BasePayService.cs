@@ -1,6 +1,6 @@
 ﻿using SyncSoft.Payment.Business.Interface;
 
-namespace SyncSoft.Payment.Business.Biz
+namespace SyncSoft.Payment.Business.Biz.Base
 {
     public abstract class BasePayBiz
     {

@@ -3,7 +3,7 @@
     /// <summary>
     /// 支付宝应用端接口
     /// </summary>
-    public interface IAliPayAppBiz:IBaseAppBiz
+    public interface IAliPayAppBiz:IBaseAppPayBiz
     {
         //当面付条码支付
         void tradePay(string builder);

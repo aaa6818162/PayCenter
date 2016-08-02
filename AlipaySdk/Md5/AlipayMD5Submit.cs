@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Xml;
 
@@ -131,6 +134,65 @@ namespace AlipaySdk.Md5
             sbHtml.Append("<script>document.forms['alipaysubmit'].submit();</script>");
 
             return sbHtml.ToString();
+        }
+
+        /// <summary>
+        /// 建立请求，以模拟远程HTTP的POST请求方式构造并获取支付的处理结果
+        /// </summary>
+        /// <param name="sParaTemp">请求参数数组</param>
+        /// <returns>处理结果</returns>
+        public string BuildRequest(SortedDictionary<string, string> sParaTemp)
+        {
+            Encoding code = Encoding.GetEncoding(_input_charset);
+
+            //待请求参数数组字符串
+            string strRequestData = BuildRequestParaToString(sParaTemp, code);
+
+            //把数组转换成流中所需字节数组类型
+            byte[] bytesRequestData = code.GetBytes(strRequestData);
+
+            //构造请求地址
+            string strUrl = GATEWAY_NEW + "_input_charset=" + _input_charset;
+
+            //请求远程HTTP
+            string strResult = "";
+            try
+            {
+                //设置HttpWebRequest基本信息
+                HttpWebRequest myReq = (HttpWebRequest)HttpWebRequest.Create(strUrl);
+                myReq.Method = "post";
+                myReq.ContentType = "application/x-www-form-urlencoded";
+
+                //填充POST数据
+                myReq.ContentLength = bytesRequestData.Length;
+                Stream requestStream = myReq.GetRequestStream();
+                requestStream.Write(bytesRequestData, 0, bytesRequestData.Length);
+                requestStream.Close();
+
+                //发送POST数据请求服务器
+                HttpWebResponse HttpWResp = (HttpWebResponse)myReq.GetResponse();
+                Stream myStream = HttpWResp.GetResponseStream();
+
+                //获取服务器返回信息
+                StreamReader reader = new StreamReader(myStream, code);
+                StringBuilder responseData = new StringBuilder();
+                String line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    responseData.Append(line);
+                }
+
+                //释放
+                myStream.Close();
+
+                strResult = responseData.ToString();
+            }
+            catch (Exception exp)
+            {
+                strResult = "报错：" + exp.Message;
+            }
+
+            return strResult;
         }
 
 

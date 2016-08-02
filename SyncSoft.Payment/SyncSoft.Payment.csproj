@@ -45,20 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Biz\AliPayAppBiz.cs" />
-    <Compile Include="Business\Biz\AlipayBiz.cs" />
-    <Compile Include="Business\Biz\BasePayService.cs" />
-    <Compile Include="Business\Biz\CmbBankAppBiz.cs" />
-    <Compile Include="Business\Biz\CmbBankBiz.cs" />
+    <Compile Include="Business\Biz\App\AliPayAppBiz.cs" />
+    <Compile Include="Business\Biz\FApp\AlipayBiz.cs" />
+    <Compile Include="Business\Biz\Base\BasePayService.cs" />
+    <Compile Include="Business\Biz\App\CmbBankAppBiz.cs" />
+    <Compile Include="Business\Biz\FApp\CmbBankBiz.cs" />
     <Compile Include="Business\Biz\LogBiz.cs" />
-    <Compile Include="Business\Interface\IBaseAppBiz.cs" />
-    <Compile Include="Business\Interface\IAlipayBiz.cs" />
-    <Compile Include="Business\Interface\IAliPayAppBiz.cs" />
-    <Compile Include="Business\Interface\ICmbBankAppBiz.cs" />
-    <Compile Include="Business\Interface\ICmbBankBiz.cs" />
+    <Compile Include="Business\Interface\Base\IBaseAppPayBiz.cs" />
+    <Compile Include="Business\Interface\FApp\IAlipayBiz.cs" />
+    <Compile Include="Business\Interface\App\IAliPayAppBiz.cs" />
+    <Compile Include="Business\Interface\App\ICmbBankAppBiz.cs" />
+    <Compile Include="Business\Interface\FApp\ICmbBankBiz.cs" />
     <Compile Include="Business\Interface\ILogBiz.cs" />
-    <Compile Include="Business\Interface\IBaseTradeBiz.cs" />
+    <Compile Include="Business\Interface\Base\IBasePayBiz.cs" />
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Domain\Response\AlipayResponse.cs" />
     <Compile Include="IOC\Container.cs" />
     <Compile Include="Model\Config\AlipayConfig.cs" />
     <Compile Include="Model\Config\CmbBankConfig.cs" />
@@ -68,16 +69,13 @@
     <Compile Include="Model\Config\PayCenterConfig.cs" />
     <Compile Include="Model\Config\TenpayConfig.cs" />
     <Compile Include="Domain\JsonBuilder.cs" />
-    <Compile Include="Domain\Request\AlipayGetRequestHtmlRequest.cs" />
+    <Compile Include="Domain\Request\GetRequestHtmlRequest.cs" />
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tool\MD5Helper.cs" />
-    <Compile Include="Tool\PayCenterNotify.cs" />
-    <Compile Include="Tool\PayCenterSubmit.cs" />
-    <Compile Include="Tool\PayCenterToolKit.cs" />
+    <Compile Include="DataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Response\" />
+    <Folder Include="Tool\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlipaySdk\AlipaySdk.csproj">

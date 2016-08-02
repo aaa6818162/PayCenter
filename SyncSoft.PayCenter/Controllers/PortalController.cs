@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using PayCenterSdk;
 using PayCenterSdk.Model;
+using SyncSoft.Payment;
+using SyncSoft.Payment.Business.Biz;
+using SyncSoft.Payment.Business.Biz.FApp;
+using SyncSoft.Payment.Domain.Request;
 
 //using SyncSoft.PayCenterSdk;
 //using SyncSoft.PayCenterSdk.Model;
@@ -63,6 +67,28 @@ namespace SyncSoft.PayCenter.Controllers
             }
             else
             {
+                switch (payCenterRequest.PayType)
+                {
+                    case PayEnum.Alipay:
+                        var request = new GetRequestHtmlRequest();
+                        request.Partner = payCenterRequest.OrderNo;
+                        request.PayCenterPartner = payCenterRequest.Partner;
+                        request.UserName = payCenterRequest.UserName;
+                        request.UserId = payCenterRequest.UserId;
+                        request.OrderNo = payCenterRequest.OrderNo;
+                        request.PayRemark = payCenterRequest.PayRemark;
+                        request.TotalFee = payCenterRequest.TotalFee;
+                        request.SubmitTime = payCenterRequest.SubmitTime;
+                        request.PartnerPayConfig.AlipayConfig = DataAccess.GetAlipayConfig();
+
+                        var requestFrom = new AlipayBiz().GetRequestHtml(request);
+
+                        return Content(requestFrom);
+            
+                }
+
+
+
                 //建立请求
                 //PayCenterRequest request = TestDictionary.GetTestByPartnerId();
                 //string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
