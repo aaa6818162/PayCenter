@@ -18,6 +18,13 @@ namespace SyncSoft.PayCenterSdk.Service
         string BuildRequest(PayCenterRequest request, bool isRequest);
 
         /// <summary>
+        /// 查询订单信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        string QueryOrderInfo(PayCenterRequest request);
+
+        /// <summary>
         /// 签名验证
         /// </summary>
         /// <param name="request"></param>

@@ -50,6 +50,7 @@
     <Compile Include="Config\CommBankConfig.cs" />
     <Compile Include="Config\IcbcBankConfig.cs" />
     <Compile Include="Config\TenpayConfig.cs" />
+    <Compile Include="IOC\Container.cs" />
     <Compile Include="Model\NotifyEnum.cs" />
     <Compile Include="Config\PartnerConfig.cs" />
     <Compile Include="Response\AlipayResponse.cs" />
@@ -59,13 +60,14 @@
     <Compile Include="Response\PayCenterResponse.cs" />
     <Compile Include="Response\TenpayResponse.cs" />
     <Compile Include="Response\ThirdPayResponse.cs" />
-    <Compile Include="Service\AlipayService2.cs" />
     <Compile Include="Service\CmbBankService.cs" />
+    <Compile Include="Service\Interface\IAlipayService.cs" />
+    <Compile Include="Service\Interface\IAopAliPay.cs" />
     <Compile Include="Service\PayCenterService.cs" />
     <Compile Include="Service\AlipayService.cs" />
     <Compile Include="Service\BasePayService.cs" />
     <Compile Include="Service\IPayService.cs" />
-    <Compile Include="Service\ILogService.cs" />
+    <Compile Include="Service\Interface\ILogService.cs" />
     <Compile Include="Service\LogService.cs" />
     <Compile Include="Tool\MD5Helper.cs" />
     <Compile Include="Request\PayCenterRequest.cs" />
@@ -92,6 +94,13 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaySdk\AliPay\AopSdk.csproj">
+      <Project>{9c11cae5-5188-4e71-825b-68fc3135728a}</Project>
+      <Name>AopSdk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

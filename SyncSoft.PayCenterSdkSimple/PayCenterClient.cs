@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.PayCenterSdkSimple
 {
-    public class Class1
+    public class PayCenterClient
     {
+
     }
 }

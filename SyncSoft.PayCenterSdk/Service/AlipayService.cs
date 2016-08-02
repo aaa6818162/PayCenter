@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web;
+using Aop.Api;
+using Aop.Api.Request;
+using Aop.Api.Response;
 using SyncSoft.PayCenterSdk.Config;
 using SyncSoft.PayCenterSdk.Model;
 using SyncSoft.PayCenterSdk.Request;
@@ -13,8 +16,9 @@ namespace SyncSoft.PayCenterSdk.Service
     /// <summary>
     /// 支付宝付款服务
     /// </summary>
-    internal class AlipayService : BasePayService, IPayService
+    public class AlipayService : BasePayService, IPayService
     {
+
         /// <summary>
         /// 建立请求 以表单HTML形式构造（默认）
         /// </summary>
@@ -44,6 +48,26 @@ namespace SyncSoft.PayCenterSdk.Service
 
             log.LogInfo(sHtmlText);
             return sHtmlText;
+        }
+
+        /// <summary>
+        /// 查询订单信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public string QueryOrderInfo(PayCenterRequest request)
+        {
+            var payConfig = request.PartnerConfig.AlipayConfig;
+            SortedDictionary<string, string> sParaTemp = new SortedDictionary<string, string>();
+            sParaTemp.Add("partner", payConfig.Partner);
+            sParaTemp.Add("_input_charset", payConfig.InputCharset.ToLower());
+            sParaTemp.Add("service", "single_trade_query");
+            sParaTemp.Add("trade_no", "");//支付宝交易号
+            sParaTemp.Add("out_trade_no", "2016-07-28 042");//商户订单号：
+
+            //建立请求
+            string sHtmlText = new PayCenterSubmit(request.PartnerConfig.AlipayConfig.Gateway, request.PartnerConfig.AlipayConfig.Key).BuildRequest(sParaTemp);
+            return "";
         }
 
         /// <summary>
@@ -80,6 +104,18 @@ namespace SyncSoft.PayCenterSdk.Service
             var response = new ThirdPayResponse() { AlipayResponse = alipayResponse };
             return response;
         }
+
+
+        //public string GetTradeInfo()
+        //{
+        //    IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", "app_id", "merchant_private_key", "json", "RSA", "alipay_public_key", "GBK");
+        //    AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+        //    request.bizContent = "{" +
+        //    "    \"out_trade_no\":\"20150320010101001\"," +
+        //    "    \"trade_no\":\"2014112611001004680 073956707\"" +
+        //    "  }";
+        //    AlipayTradeQueryResponse response = client.execute(request);
+        //}
 
 
         #region

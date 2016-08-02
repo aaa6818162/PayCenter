@@ -30,8 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,11 +45,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Biz\AliPayAppBiz.cs" />
+    <Compile Include="Business\Biz\AlipayBiz.cs" />
+    <Compile Include="Business\Biz\BasePayService.cs" />
+    <Compile Include="Business\Biz\CmbBankAppBiz.cs" />
+    <Compile Include="Business\Biz\CmbBankBiz.cs" />
+    <Compile Include="Business\Biz\LogBiz.cs" />
+    <Compile Include="Business\Interface\IBaseAppBiz.cs" />
+    <Compile Include="Business\Interface\IAlipayBiz.cs" />
+    <Compile Include="Business\Interface\IAliPayAppBiz.cs" />
+    <Compile Include="Business\Interface\ICmbBankAppBiz.cs" />
+    <Compile Include="Business\Interface\ICmbBankBiz.cs" />
+    <Compile Include="Business\Interface\ILogBiz.cs" />
+    <Compile Include="Business\Interface\IBaseTradeBiz.cs" />
+    <Compile Include="Bootstrap.cs" />
+    <Compile Include="IOC\Container.cs" />
+    <Compile Include="Model\Config\AlipayConfig.cs" />
+    <Compile Include="Model\Config\CmbBankConfig.cs" />
+    <Compile Include="Model\Config\CommBankConfig.cs" />
+    <Compile Include="Model\Config\IcbcBankConfig.cs" />
+    <Compile Include="Model\Config\PartnerPayConfig.cs" />
+    <Compile Include="Model\Config\PayCenterConfig.cs" />
+    <Compile Include="Model\Config\TenpayConfig.cs" />
+    <Compile Include="Domain\JsonBuilder.cs" />
+    <Compile Include="Domain\Request\AlipayGetRequestHtmlRequest.cs" />
+    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tool\MD5Helper.cs" />
+    <Compile Include="Tool\PayCenterNotify.cs" />
+    <Compile Include="Tool\PayCenterSubmit.cs" />
+    <Compile Include="Tool\PayCenterToolKit.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
+    <Folder Include="Domain\Response\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlipaySdk\AlipaySdk.csproj">
+      <Project>{22ce3df8-09b7-4412-8f56-44f14697af38}</Project>
+      <Name>AlipaySdk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

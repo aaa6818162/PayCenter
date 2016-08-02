@@ -16,7 +16,7 @@ namespace SyncSoft.PayCenterSdk
             return new PayCenterRequest()
             {
                 Partner = "商户",
-                PartnerToken="1111111",
+               // PartnerToken="1111111",
                 UserName = "UserName",
                 UserId = "UserId",
                 OrderNo = "0000000001",

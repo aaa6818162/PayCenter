@@ -8,6 +8,7 @@ namespace SyncSoft.PayCenterSdk.Service
 {
     public abstract class BasePayService
     {
+        
        public ILogService log=new LogService();
     }
 }

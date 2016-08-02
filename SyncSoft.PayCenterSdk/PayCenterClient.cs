@@ -11,7 +11,7 @@ using SyncSoft.PayCenterSdk.Tool;
 
 namespace SyncSoft.PayCenterSdk
 {
-    public class PayCenterClient 
+    public class PayCenterClient
     {
         private readonly IPayService _payService;
         public PayCenterClient(PayEnum payEnum)
@@ -36,18 +36,27 @@ namespace SyncSoft.PayCenterSdk
         /// 提交表单HTML文本
         /// </summary>
         /// <returns></returns>
-        public string GetRequestHtml(PayCenterRequest request, bool isRequest=true)
+        public string GetRequestHtml(PayCenterRequest request, bool isRequest = true)
         {
             //建立请求
             return _payService.BuildRequest(request, isRequest);
         }
 
+        /// <summary>
+        /// 订单状态查询
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public string QueryOrderInfo(PayCenterRequest request)
+        {
+            return _payService.QueryOrderInfo(request);
+        }
 
         /// <summary>
         /// 处理结果
         /// </summary>
         /// <returns></returns>
-        public ThirdPayResponse GetRequestResult(string des="")
+        public ThirdPayResponse GetRequestResult(string des = "")
         {
             return _payService.GetResponse(des);
         }
@@ -56,7 +65,7 @@ namespace SyncSoft.PayCenterSdk
         /// 签名验证
         /// </summary>
         /// <returns></returns>
-        public bool SignVerify(PayCenterRequest request ,string sign)
+        public bool SignVerify(PayCenterRequest request, string sign)
         {
             return _payService.SignVerify(request, sign);
         }

@@ -13,7 +13,7 @@ namespace SyncSoft.PayCenterSdk.Request
         /// </summary>
         public string Partner { get; set; }
 
-        public string PartnerToken { get; set; }
+        //public string PartnerToken { get; set; }
 
 
         /// <summary>

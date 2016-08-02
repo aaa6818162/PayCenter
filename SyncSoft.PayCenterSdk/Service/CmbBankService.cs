@@ -59,6 +59,16 @@ namespace SyncSoft.PayCenterSdk.Service
         }
 
         /// <summary>
+        /// 查询订单信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public string QueryOrderInfo(PayCenterRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// 签名验证
         /// </summary>
         /// <param name="request"></param>
