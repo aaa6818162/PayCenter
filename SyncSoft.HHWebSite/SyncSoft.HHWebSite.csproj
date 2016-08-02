@@ -114,9 +114,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SyncSoft.PayCenterSdk\SyncSoft.PayCenterSdk.csproj">
-      <Project>{d1433471-966d-433f-8572-869dc226319f}</Project>
-      <Name>SyncSoft.PayCenterSdk</Name>
+    <ProjectReference Include="..\PayCenterSdk\PayCenterSdk.csproj">
+      <Project>{a33eb658-ff7b-47ec-82ed-226df7ee26b8}</Project>
+      <Name>PayCenterSdk</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

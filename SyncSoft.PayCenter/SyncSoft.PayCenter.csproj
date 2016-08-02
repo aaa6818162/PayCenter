@@ -130,9 +130,9 @@
     <Folder Include="Resources\css\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SyncSoft.PayCenterSdk\SyncSoft.PayCenterSdk.csproj">
-      <Project>{d1433471-966d-433f-8572-869dc226319f}</Project>
-      <Name>SyncSoft.PayCenterSdk</Name>
+    <ProjectReference Include="..\PayCenterSdk\PayCenterSdk.csproj">
+      <Project>{A33EB658-FF7B-47EC-82ED-226DF7EE26B8}</Project>
+      <Name>PayCenterSdk</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

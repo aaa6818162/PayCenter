@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using SyncSoft.PayCenterSdk;
-using SyncSoft.PayCenterSdk.Model;
-using SyncSoft.PayCenterSdk.Request;
-using SyncSoft.PayCenterSdk.Response;
+using PayCenterSdk;
+using PayCenterSdk.Model;
+
+//using SyncSoft.PayCenterSdk;
+//using SyncSoft.PayCenterSdk.Model;
+//using SyncSoft.PayCenterSdk.Request;
+//using SyncSoft.PayCenterSdk.Response;
 
 namespace SyncSoft.PayCenter.Controllers
 {
@@ -19,28 +22,23 @@ namespace SyncSoft.PayCenter.Controllers
             return View();
         }
 
-        public ActionResult ConfrimPay(PayEnum PayType)
-        {
-            //建立请求
-            PayCenterRequest request = TestDictionary.GetTestByPartnerId();
-            string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
-            return Content(requestFrom);
-        }
+        //public ActionResult ConfrimPay(PayEnum PayType)
+        //{
+        //    //建立请求
+        //    PayCenterRequest request = TestDictionary.GetTestByPartnerId();
+        //    string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
+        //    return Content(requestFrom);
+        //}
 
 
         public ActionResult Index()
         {
-            var t = new PayCenterClient(PayEnum.PayCenter).GetRequestResult().PayCenterResponse;
-            if (string.IsNullOrEmpty(t.sign)
-                || string.IsNullOrEmpty(t.sign_type)
-                || string.IsNullOrEmpty(t.OrderNo)
-                || string.IsNullOrEmpty(t.Partner)
-                || string.IsNullOrEmpty(t.UserId)
-                || string.IsNullOrEmpty(t.UserName)
-                || string.IsNullOrEmpty(t.PayRemark)
-                )
+            var payCenterRequest = new PayCenterServer().GetRequest();
+
+            var validateResult = payCenterRequest.Validate();
+            if (!validateResult.Item1)
             {
-                ViewBag.Message = "当前交易请求缺少必要的参数";
+                ViewBag.Message = validateResult.Item2;
                 return View();
             }
 
@@ -50,17 +48,37 @@ namespace SyncSoft.PayCenter.Controllers
             //    return View();
             //}
 
-            var config = TestDictionary.GetTestByPartnerId();
-            PayCenterRequest request = t;
-            t.PartnerConfig = TestDictionary.GetTestByPartnerId().PartnerConfig;
+            payCenterRequest.PayCenterConfig = TestDictionary.GetTestByPartnerId().PayCenterConfig;
 
             //验证数据是否已被篡改
-            if (!new PayCenterClient(t.PayType).SignVerify(request, t.sign))
+            if (!new PayCenterClient().SignVerify(payCenterRequest, Request["Sign"]))
             {
                 ViewBag.Message = "数据已被篡改";
                 return View();
             }
-            return View("Pay");
+
+            if (payCenterRequest.PayType == PayEnum.PayCenter)
+            {
+                return View("Pay");
+            }
+            else
+            {
+                //建立请求
+                //PayCenterRequest request = TestDictionary.GetTestByPartnerId();
+                //string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
+                //return Content(requestFrom);
+                return View();
+            }
+        }
+
+        /// <summary>
+        /// 移动端接口
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AppIndex()
+        {
+            return View();
         }
 
 
@@ -98,27 +116,28 @@ namespace SyncSoft.PayCenter.Controllers
 
         public ActionResult AlipayReturn()
         {
-            var entity = new PayCenterClient(PayEnum.Alipay).GetRequestResult("支付宝同步");
-            //获取配置信息
-            PayCenterRequest request = TestDictionary.GetTestByPartnerId(entity.AlipayResponse.Partner);
-            request.ThirdPayResponse = entity;
+            //var entity = new PayCenterClient(PayEnum.Alipay).GetRequestResult("支付宝同步");
+            ////获取配置信息
+            //PayCenterRequest request = TestDictionary.GetTestByPartnerId(entity.AlipayResponse.Partner);
+            //request.ThirdPayResponse = entity;
 
-            if (!new PayCenterClient(PayEnum.Alipay).SignVerify(request, entity.AlipayResponse.Sign))
-            {
-                ViewBag.Message = "数据已被篡改";
-                return View();
-            }
+            //if (!new PayCenterClient(PayEnum.Alipay).SignVerify(request, entity.AlipayResponse.Sign))
+            //{
+            //    ViewBag.Message = "数据已被篡改";
+            //    return View();
+            //}
 
-            if (!entity.AlipayResponse.IsSuccess)
-            {
-                ViewBag.Message = "交易失败";
-                return View();
-            }
+            //if (!entity.AlipayResponse.IsSuccess)
+            //{
+            //    ViewBag.Message = "交易失败";
+            //    return View();
+            //}
 
-            request.IsSuccess = true;
+            //request.IsSuccess = true;
 
-            string requestFrom = new PayCenterClient(PayEnum.PayCenter).GetRequestHtml(request, false);
-            return Content(requestFrom);
+            //string requestFrom = new PayCenterClient(PayEnum.PayCenter).GetRequestHtml(request, false);
+            //return Content(requestFrom);
+            return View();
         }
 
         /// <summary>
@@ -141,15 +160,15 @@ namespace SyncSoft.PayCenter.Controllers
 
         public ActionResult CmbReturn()
         {
-            var entity = new PayCenterClient(PayEnum.CmbBank).GetRequestResult("支付宝同步");
-            //获取配置信息
-            PayCenterRequest request = TestDictionary.GetTestByPartnerId("");
-            request.ThirdPayResponse = entity;
+            //var entity = new PayCenterClient(PayEnum.CmbBank).GetRequestResult("支付宝同步");
+            ////获取配置信息
+            //PayCenterRequest request = TestDictionary.GetTestByPartnerId("");
+            //request.ThirdPayResponse = entity;
 
-            if (!new PayCenterClient(PayEnum.CmbBank).SignVerify(request, entity.CmbBankResponse.Signature))
-            {
+            //if (!new PayCenterClient(PayEnum.CmbBank).SignVerify(request, entity.CmbBankResponse.Signature))
+            //{
 
-            }
+            //}
 
             return View();
         }

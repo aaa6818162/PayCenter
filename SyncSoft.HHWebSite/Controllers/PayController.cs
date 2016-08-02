@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SyncSoft.PayCenterSdk;
-using SyncSoft.PayCenterSdk.Model;
-using SyncSoft.PayCenterSdk.Request;
+using PayCenterSdk;
+using PayCenterSdk.Model;
 
 namespace SyncSoft.HHWebSite.Controllers
 {
@@ -34,43 +33,43 @@ namespace SyncSoft.HHWebSite.Controllers
         /// <returns></returns>
         public ActionResult PayResult()
         {
-            var t = new PayCenterClient(PayEnum.PayCenter).GetRequestResult().PayCenterResponse;
+            //var t = new PayCenterClient().GetRequestResult().PayCenterResponse;
 
-            if (string.IsNullOrEmpty(t.sign)
-                || string.IsNullOrEmpty(t.sign_type)
-                || string.IsNullOrEmpty(t.OrderNo)
-                || string.IsNullOrEmpty(t.Partner)
-                || string.IsNullOrEmpty(t.UserId)
-                || string.IsNullOrEmpty(t.UserName)
-                || string.IsNullOrEmpty(t.PayRemark)
-                )
-            {
-                ViewBag.Message = "当前交易请求缺少必要的参数";
-                return View();
-            }
-
-            //if ((DateTime.Now - submittime).TotalSeconds > 60)
+            //if (string.IsNullOrEmpty(t.sign)
+            //    || string.IsNullOrEmpty(t.sign_type)
+            //    || string.IsNullOrEmpty(t.OrderNo)
+            //    || string.IsNullOrEmpty(t.Partner)
+            //    || string.IsNullOrEmpty(t.UserId)
+            //    || string.IsNullOrEmpty(t.UserName)
+            //    || string.IsNullOrEmpty(t.PayRemark)
+            //    )
             //{
-            //    ViewBag.Message = "当前交易请求已超时";
+            //    ViewBag.Message = "当前交易请求缺少必要的参数";
             //    return View();
             //}
 
-            var config = TestDictionary.GetTestByPartnerId();
-            PayCenterRequest request = t;
-            t.PartnerConfig = TestDictionary.GetTestByPartnerId().PartnerConfig;
+            ////if ((DateTime.Now - submittime).TotalSeconds > 60)
+            ////{
+            ////    ViewBag.Message = "当前交易请求已超时";
+            ////    return View();
+            ////}
 
-            //验证数据是否已被篡改
-            if (!new PayCenterClient(t.PayType).SignVerify(request, t.sign))
-            {
-                ViewBag.Message = "数据已被篡改";
-                return View();
-            }
+            //var config = TestDictionary.GetTestByPartnerId();
+            //PayCenterRequest request = t;
+            //t.PartnerConfig = TestDictionary.GetTestByPartnerId().PartnerConfig;
 
-            if (!t.IsSuccess)
-            {
-                return View("Fail");
+            ////验证数据是否已被篡改
+            //if (!new PayCenterClient(t.PayType).SignVerify(request, t.sign))
+            //{
+            //    ViewBag.Message = "数据已被篡改";
+            //    return View();
+            //}
 
-            }
+            //if (!t.IsSuccess)
+            //{
+            //    return View("Fail");
+
+            //}
 
             return View("Success");
         }

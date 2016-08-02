@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SyncSoft.PayCenterSdk;
-using SyncSoft.PayCenterSdk.Model;
-using SyncSoft.PayCenterSdk.Request;
+using PayCenterSdk;
+using PayCenterSdk.Model;
+
 
 namespace SyncSoft.HHWebSite.Controllers
 {
@@ -20,8 +20,8 @@ namespace SyncSoft.HHWebSite.Controllers
         public ActionResult Confirm(PayEnum PayEnum)
         {
             PayCenterRequest request = TestDictionary.GetTestByPartnerId();
-
-            string requestFrom = new PayCenterClient(PayEnum).GetRequestHtml(request);
+            request.PayType = PayEnum;
+            string requestFrom = new PayCenterClient().GetRequestHtml(request);
 
             return Content(requestFrom);
         }
