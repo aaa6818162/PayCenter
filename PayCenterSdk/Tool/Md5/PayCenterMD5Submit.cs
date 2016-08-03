@@ -38,6 +38,12 @@ namespace PayCenterSdk.Tool.Md5
             _sign_type = sign_type.Trim().ToUpper();
         }
 
+        public PayCenterMD5Submit(string gateway)
+        {
+            _gateway = gateway;
+            _input_charset = "utf-8";
+        }
+
         /// <summary>
         /// 生成请求时的签名
         /// </summary>

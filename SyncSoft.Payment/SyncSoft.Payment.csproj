@@ -61,6 +61,7 @@
     <Compile Include="Bootstrap.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Domain\Response\AlipayResponse.cs" />
+    <Compile Include="IOC\Container2.cs" />
     <Compile Include="IOC\Container.cs" />
     <Compile Include="Model\Config\AlipayConfig.cs" />
     <Compile Include="Model\Config\CmbBankConfig.cs" />

@@ -5,40 +5,33 @@ using System.Reflection;
 
 namespace SyncSoft.Payment.IOC
 {
-    public class Container
+    public class Container2
     {
-        private static readonly Dictionary<string, Type> iocMap = new Dictionary<string, Type>();
+        private static readonly Dictionary<Type, Type> iocMap = new Dictionary<Type, Type>();
 
-
-        /// <summary>
-        /// 通过名称注册的情况
-        /// </summary>
-        /// <typeparam name="TYpetoResolve"></typeparam>
-        /// <typeparam name="TResolvedType"></typeparam>
-        /// <param name="name"></param>
-        public static void Register<TYpetoResolve, TResolvedType>(string name="")
+        public static void Register<TYpetoResolve, TResolvedType>()
         {
-            if (iocMap.ContainsKey(typeof(TYpetoResolve)+name))
+            if (iocMap.ContainsKey(typeof(TYpetoResolve)))
             {
                 throw new Exception(string.Format("Type {0} already registered.", typeof(TYpetoResolve).FullName));
             }
-            iocMap.Add(typeof(TYpetoResolve)+name, typeof(TResolvedType));
+            iocMap.Add(typeof(TYpetoResolve), typeof(TResolvedType));
         }
 
-        public static T Resolve<T>(string name = "")
+        public static T Resolve<T>()
         {
-            return (T)Resolve(typeof(T),name);
+            return (T)Resolve(typeof(T));
         }
 
 
-        public static object Resolve(Type typeToResolve, string name = "")
+        public static object Resolve(Type typeToResolve)
         {
             //Find the registered type for typeToResolve
-            if (!iocMap.ContainsKey(typeToResolve+name))
+            if (!iocMap.ContainsKey(typeToResolve))
             {
                 throw new Exception(string.Format("Can't resolve type {0}. Type is not registered.", typeToResolve.FullName));
             }
-            Type resolvedType = iocMap[typeToResolve + name];
+            Type resolvedType = iocMap[typeToResolve];
             //Try to construct the object
             //step-1: find the constructor. 
             ConstructorInfo ctorInfo = resolvedType.GetConstructors().First();

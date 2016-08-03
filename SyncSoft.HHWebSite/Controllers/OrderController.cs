@@ -14,6 +14,8 @@ namespace SyncSoft.HHWebSite.Controllers
         // GET: Order
         public ActionResult Index()
         {
+            new PayCenterClient().GetPayCenterConfig(  "1111","http://localhost:24131/api/PayCenterConfig/GetPayCenterConfig?"
+              );
             return View();
         }
 

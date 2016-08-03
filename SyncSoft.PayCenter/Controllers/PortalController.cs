@@ -9,7 +9,9 @@ using PayCenterSdk.Model;
 using SyncSoft.Payment;
 using SyncSoft.Payment.Business.Biz;
 using SyncSoft.Payment.Business.Biz.FApp;
+using SyncSoft.Payment.Business.Interface.Base;
 using SyncSoft.Payment.Domain.Request;
+using SyncSoft.Payment.IOC;
 using DataAccess = PayCenterSdk.DataAccess;
 
 //using SyncSoft.PayCenterSdk;
@@ -30,26 +32,19 @@ namespace SyncSoft.PayCenter.Controllers
         public ActionResult ConfrimPay(PayEnum PayType)
         {
             var payCenterRequest = TestDictionary.GetTestByPartnerId();
-            //建立请求
-            switch (PayType)
-            {
-                case PayEnum.Alipay:
-                    var request = new GetRequestHtmlRequest();
-                    request.Partner = payCenterRequest.OrderNo;
-                    request.PayCenterPartner = payCenterRequest.Partner;
-                    request.UserName = payCenterRequest.UserName;
-                    request.UserId = payCenterRequest.UserId;
-                    request.OrderNo = payCenterRequest.OrderNo;
-                    request.PayRemark = payCenterRequest.PayRemark;
-                    request.TotalFee = payCenterRequest.TotalFee;
-                    request.SubmitTime = payCenterRequest.SubmitTime;
-                    request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+            var request = new GetRequestHtmlRequest();
+            request.Partner = payCenterRequest.OrderNo;
+            request.PayCenterPartner = payCenterRequest.Partner;
+            request.UserName = payCenterRequest.UserName;
+            request.UserId = payCenterRequest.UserId;
+            request.OrderNo = payCenterRequest.OrderNo;
+            request.PayRemark = payCenterRequest.PayRemark;
+            request.TotalFee = payCenterRequest.TotalFee;
+            request.SubmitTime = payCenterRequest.SubmitTime;
+            request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+            var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
 
-                    var requestFrom = new AlipayBiz().GetRequestHtml(request);
-
-                    return Content(requestFrom);
-
-            }
+            return Content(requestFrom);
             return View();
         }
 
@@ -86,32 +81,19 @@ namespace SyncSoft.PayCenter.Controllers
             }
             else
             {
-                switch (payCenterRequest.PayType)
-                {
-                    case PayEnum.Alipay:
-                        var request = new GetRequestHtmlRequest();
-                        request.Partner = payCenterRequest.OrderNo;
-                        request.PayCenterPartner = payCenterRequest.Partner;
-                        request.UserName = payCenterRequest.UserName;
-                        request.UserId = payCenterRequest.UserId;
-                        request.OrderNo = payCenterRequest.OrderNo;
-                        request.PayRemark = payCenterRequest.PayRemark;
-                        request.TotalFee = payCenterRequest.TotalFee;
-                        request.SubmitTime = payCenterRequest.SubmitTime;
-                        request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+                var request = new GetRequestHtmlRequest();
+                request.Partner = payCenterRequest.OrderNo;
+                request.PayCenterPartner = payCenterRequest.Partner;
+                request.UserName = payCenterRequest.UserName;
+                request.UserId = payCenterRequest.UserId;
+                request.OrderNo = payCenterRequest.OrderNo;
+                request.PayRemark = payCenterRequest.PayRemark;
+                request.TotalFee = payCenterRequest.TotalFee;
+                request.SubmitTime = payCenterRequest.SubmitTime;
+                request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+                var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
+                return Content(requestFrom);
 
-                        var requestFrom = new AlipayBiz().GetRequestHtml(request);
-
-                        return Content(requestFrom);
-
-                }
-
-
-
-                //建立请求
-                //PayCenterRequest request = TestDictionary.GetTestByPartnerId();
-                //string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
-                //return Content(requestFrom);
                 return View();
             }
         }

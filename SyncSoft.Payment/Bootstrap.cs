@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using SyncSoft.Payment.Business.Biz;
 using SyncSoft.Payment.Business.Biz.FApp;
 using SyncSoft.Payment.Business.Interface;
+using SyncSoft.Payment.Business.Interface.Base;
 using SyncSoft.Payment.Business.Interface.FApp;
 using SyncSoft.Payment.IOC;
-
+[assembly: PreApplicationStartMethod(typeof(SyncSoft.Payment.Bootstrap), "Register")] 
 namespace SyncSoft.Payment
 {
     /// <summary>
@@ -18,7 +20,8 @@ namespace SyncSoft.Payment
     {
         public static void Register()
         {
-            Container.Register<IAlipayBiz, AlipayBiz>();
+            Container.Register<IBasePayBiz, AlipayBiz>("Alipay");
+            Container.Register<IBasePayBiz, CmbBankBiz>("CmbBank");
         }
     }
 }

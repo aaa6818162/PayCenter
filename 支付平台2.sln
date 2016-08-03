@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.PayCenter", "SyncSoft.PayCenter\SyncSoft.PayCenter.csproj", "{75AD24F4-0C64-4775-B86D-391769AF978C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.PayCenterSdk", "SyncSoft.PayCenterSdk\SyncSoft.PayCenterSdk.csproj", "{D1433471-966D-433F-8572-869DC226319F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.Payment", "SyncSoft.Payment\SyncSoft.Payment.csproj", "{671C01A8-EFDD-4B3D-87EF-9280007E9502}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.HHWebSite", "SyncSoft.HHWebSite\SyncSoft.HHWebSite.csproj", "{BC626EFB-B5C0-40F9-AA59-0E4FEACECBD7}"
@@ -35,10 +33,6 @@ Global
 		{75AD24F4-0C64-4775-B86D-391769AF978C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75AD24F4-0C64-4775-B86D-391769AF978C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75AD24F4-0C64-4775-B86D-391769AF978C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1433471-966D-433F-8572-869DC226319F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1433471-966D-433F-8572-869DC226319F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1433471-966D-433F-8572-869DC226319F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1433471-966D-433F-8572-869DC226319F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{671C01A8-EFDD-4B3D-87EF-9280007E9502}.Release|Any CPU.ActiveCfg = Release|Any CPU
