@@ -9,20 +9,18 @@ namespace SyncSoft.Payment.Business.Interface.FApp
         /// <summary>
         /// 处理支付返回信息 通过上下文获取请求信息
         /// </summary>
-        /// <param name="des">描述信息</param>
         /// <returns></returns>
-        AlipayResponse GetResponse(string des);
+        AlipayResponse GetResponse();
 
 
-      /// <summary>
+        /// <summary>
         /// 签名验证
-      /// </summary>
-      /// <param name="payConfig"></param>
-      /// <param name="sign"></param>
-      /// <param name="notify_id"></param>
-      /// <param name="isGet"></param>
-      /// <returns></returns>
-        bool SignVerify(AlipayConfig payConfig, string sign, string notify_id, bool isGet = true);
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="payConfig"></param>
+        /// <param name="sign"></param>
+        /// <returns></returns>
+        bool SignVerify(AlipayResponse response, AlipayConfig payConfig, string sign);
 
         /// <summary>
         /// 通过商户订单号

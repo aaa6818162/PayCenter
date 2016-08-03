@@ -1,4 +1,4 @@
-﻿namespace SyncSoft.Payment.Config
+﻿namespace SyncSoft.Payment.Model.Config
 {
     /// <summary>
     /// 支付宝支付实体
@@ -19,7 +19,7 @@
         /// <summary>
         /// 交易安全检验码
         /// </summary>
-        public string Key { get; set; }
+        public string Md5Key { get; set; }
         /// <summary>
         /// 服务器异步通知页面路径
         /// </summary>

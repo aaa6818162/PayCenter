@@ -16,24 +16,26 @@ namespace PayCenterSdk
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public string GetResponseHtml(PayCenterResponse request)
+        public string GetResponseHtml(PayCenterResponse request )
         {
             var payConfig = request.PayCenterConfig;
             //把请求参数打包成数组 
+            var propertyList = request.GetType().GetProperties();
             var sParaTemp = new SortedDictionary<string, string>();
-            sParaTemp.Add("Partner", request.Partner);
-            sParaTemp.Add("UserName", request.UserName);
-            sParaTemp.Add("UserId", request.UserId);
-            sParaTemp.Add("OrderNo", request.OrderNo);
-            sParaTemp.Add("PayRemark", request.PayRemark);
-            sParaTemp.Add("PayType", request.PayType.ToString());
-            sParaTemp.Add("TotalFee", request.TotalFee.ToString("0.00"));
-            sParaTemp.Add("SubmitTime", request.SubmitTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            sParaTemp.Add("IsSuccess", request.IsSuccess.ToString());
+            propertyList.ToList().ForEach(p =>
+            {
+                if (p.GetValue(request, null) != null)
+                {
+                    if (p.Name != "PayCenterConfig")
+                    {
+                        sParaTemp.Add(p.Name, p.GetValue(request, null).ToString());
+                    }
+                }
+            });
 
-            //建立请求
+            //建立请求 ReturnUrl
             var sHtmlText = new PayCenterMD5Submit(
-                payConfig.Gateway, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).BuildRequest(sParaTemp, "post", "确认");
+                payConfig.ReturnUrl, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).BuildRequest(sParaTemp, "post", "确认");
 
             return sHtmlText;
         }
@@ -43,43 +45,64 @@ namespace PayCenterSdk
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public string GetResponse(PayCenterResponse request)
-        {
-            var payConfig = request.PayCenterConfig;
-            //把请求参数打包成数组 
-            var sParaTemp = new SortedDictionary<string, string>();
-            sParaTemp.Add("Partner", request.Partner);
-            sParaTemp.Add("UserName", request.UserName);
-            sParaTemp.Add("UserId", request.UserId);
-            sParaTemp.Add("OrderNo", request.OrderNo);
-            sParaTemp.Add("PayRemark", request.PayRemark);
-            sParaTemp.Add("PayType", request.PayType.ToString());
-            sParaTemp.Add("TotalFee", request.TotalFee.ToString("0.00"));
-            sParaTemp.Add("SubmitTime", request.SubmitTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            sParaTemp.Add("IsSuccess", request.IsSuccess.ToString());
+        //public string GetResponse(PayCenterResponse request)
+        //{
+        //    var payConfig = request.PayCenterConfig;
+        //    //把请求参数打包成数组 
+        //    var sParaTemp = new SortedDictionary<string, string>();
+        //    sParaTemp.Add("Partner", request.Partner);
+        //    sParaTemp.Add("UserName", request.UserName);
+        //    sParaTemp.Add("UserId", request.UserId);
+        //    sParaTemp.Add("OrderNo", request.OrderNo);
+        //    sParaTemp.Add("PayRemark", request.PayRemark);
+        //    sParaTemp.Add("PayType", request.PayType.ToString());
+        //    sParaTemp.Add("TotalFee", request.TotalFee.ToString("0.00"));
+        //    sParaTemp.Add("SubmitTime", request.SubmitTime.ToString("yyyy-MM-dd HH:mm:ss"));
+        //    sParaTemp.Add("IsSuccess", request.IsSuccess.ToString());
 
-            //建立请求
-            var result = new PayCenterMD5Submit(
-                payConfig.Gateway, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).BuildRequest(sParaTemp);
-            return result;
-        }
+        //    //建立请求
+        //    var result = new PayCenterMD5Submit(
+        //        payConfig.Gateway, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).BuildRequest(sParaTemp);
+        //    return result;
+        //}
 
 
 
-        public bool SignVerify(PayCenterResponse request, string sign)
+        //public bool SignVerify(PayCenterResponse request, string sign)
+        //{
+        //    var payConfig = request.PayCenterConfig;
+        //    //把请求参数打包成数组 
+        //    var propertyList = request.GetType().GetProperties();
+        //    var sParaTemp = new SortedDictionary<string, string>();
+        //    propertyList.ToList().ForEach(p =>
+        //    {
+        //        if (p.GetValue(request, null) != null)
+        //        {
+        //            if (p.Name != "PayCenterConfig")
+        //            {
+        //                sParaTemp.Add(p.Name, p.GetValue(request, null).ToString());
+        //            }
+        //        }
+        //    });
+        //    return new PayCenterMD5Notify(payConfig.Partner, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).Verify(sParaTemp, sign);
+        //}
+
+        public bool SignVerify(PayCenterRequest request, string sign)
         {
             var payConfig = request.PayCenterConfig;
             //把请求参数打包成数组 
             var propertyList = request.GetType().GetProperties();
             var sParaTemp = new SortedDictionary<string, string>();
-            sParaTemp.Add("Partner", request.Partner);
-            sParaTemp.Add("UserName", request.UserName);
-            sParaTemp.Add("UserId", request.UserId);
-            sParaTemp.Add("OrderNo", request.OrderNo);
-            sParaTemp.Add("PayRemark", request.PayRemark);
-            sParaTemp.Add("TotalFee", request.TotalFee.ToString("0.00"));
-            sParaTemp.Add("SubmitTime", request.SubmitTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            sParaTemp.Add("IsSuccess", request.IsSuccess.ToString());
+            propertyList.ToList().ForEach(p =>
+            {
+                if (p.GetValue(request, null) != null)
+                {
+                    if (p.Name != "PayCenterConfig")
+                    {
+                        sParaTemp.Add(p.Name, p.GetValue(request, null).ToString());
+                    }
+                }
+            });
             return new PayCenterMD5Notify(payConfig.Partner, payConfig.Md5Key, payConfig.InputCharset, payConfig.SignType).Verify(sParaTemp, sign);
         }
 

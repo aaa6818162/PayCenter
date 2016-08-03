@@ -18,7 +18,7 @@ namespace PayCenterSdk
                // PartnerToken="1111111",
                 UserName = "UserName",
                 UserId = "UserId",
-                OrderNo = "0000000001",
+                OrderNo = DateTime.Now.ToString("yyyy-MM-dd HH"),
                 TotalFee = 0.01m,
                 PayRemark = "备注信息",
                 PayType = PayEnum.PayCenter,
@@ -30,8 +30,8 @@ namespace PayCenterSdk
                     Md5Key = "123456",
                     NotifyUrl = "http://localhost:45490/Pay/PayResultNotify?",
                     ReturnUrl = "http://localhost:45490/Pay/PayResult?",
-                    InputCharset = "utf-8",
-                    SignType = "MD5",
+                    //InputCharset = "utf-8",
+                    //SignType = "MD5",
                 }
             };
 

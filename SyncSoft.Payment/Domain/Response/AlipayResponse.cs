@@ -11,52 +11,28 @@ namespace SyncSoft.Payment.Domain.Response
     /// </summary>
     public class AlipayResponse
     {
-        /// <summary>
-        /// 通知验证ID notify_id
-        /// </summary>
-        public string NotifyId { get; set; }
-
-        /// <summary>
-        /// 支付宝生成的签名结果sign
-        /// </summary>
-        public string Sign { get; set; }
-
-        /// <summary>
-        /// 商户订单号out_trade_no
-        /// </summary>
-        public string OrderNo { get; set; }
-
-        /// <summary>
-        /// seller_email 商家账号
-        /// </summary>
-        public string PartnerEmail { get; set; }
-
-        /// <summary>
-        /// 商家Id
-        /// </summary>
-        public string Partner { get; set; }
 
 
-        /// <summary>
-        /// 支付宝交易号 trade_no
-        /// </summary>
-        public string PaySerialNumber { get; set; }
+        public string body { get; set; }
+        public string buyer_email { get; set; }
+        public string buyer_id { get; set; }
+        public string exterface { get; set; }
+        public string is_success { get; set; }
+        public string notify_id { get; set; }
+        public string notify_time { get; set; }
+        public string notify_type { get; set; }
+        public string out_trade_no { get; set; }
+        public string payment_type { get; set; }
+        public string seller_email { get; set; }
+        public string seller_id { get; set; }
+        public string subject { get; set; }
+        public string total_fee { get; set; }
+        public string trade_no { get; set; }
+        public string trade_status { get; set; }
+        public string sign { get; set; }
+        public string sign_type { get; set; }
 
-        /// <summary>
-        /// gmt_payment 支付日期
-        /// </summary>
-        public string PayDate { get; set; }
-
-        /// <summary>
-        /// price
-        /// </summary>
-        public string TotalAmount { get; set; }
-
-        /// <summary>
-        ///交易状态 trade_status
-        /// </summary>
-        public string TradeStatus { get; set; }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -64,8 +40,8 @@ namespace SyncSoft.Payment.Domain.Response
         {
             get
             {
-                if (TradeStatus == "WAIT_SELLER_SEND_GOODS" || TradeStatus == "TRADE_FINISHED" ||
-                       TradeStatus == "TRADE_SUCCESS")
+                if (trade_status == "WAIT_SELLER_SEND_GOODS" || trade_status == "TRADE_FINISHED" ||
+                       trade_status == "TRADE_SUCCESS")
                 {
                     return true;
                 }

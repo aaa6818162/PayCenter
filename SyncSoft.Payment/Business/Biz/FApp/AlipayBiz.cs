@@ -100,29 +100,56 @@ namespace SyncSoft.Payment.Business.Biz.FApp
         /// <param name="notify_id"></param>
         /// <param name="isGet"></param>
         /// <returns></returns>
-        public bool SignVerify(AlipayConfig payConfig, string sign, string notify_id, bool isGet = true)
+        public bool SignVerify(AlipayResponse response,  AlipayConfig payConfig, string sign)
         {
-            var getParams = isGet ? GetRequestGet() : GetRequestPost();
-            return new AlipayMd5Notify(payConfig.Partner, payConfig.Key, payConfig.InputCharset, payConfig.HttpsVeryfyUrl).Verify(getParams, notify_id, sign);
+            var sArray = new SortedDictionary<string, string>();
+            sArray.Add("body", response.body);
+            sArray.Add("buyer_email", response.buyer_email);
+            sArray.Add("buyer_id", response.buyer_id);
+            sArray.Add("exterface", response.exterface);
+            sArray.Add("is_success", response.is_success);
+            sArray.Add("notify_id", response.notify_id);
+            sArray.Add("notify_time", response.notify_time);
+            sArray.Add("notify_type", response.notify_type);
+            sArray.Add("out_trade_no", response.out_trade_no);
+            sArray.Add("payment_type", response.payment_type);
+            sArray.Add("seller_email", response.seller_email);
+            sArray.Add("seller_id", response.seller_id);
+            sArray.Add("subject", response.subject);
+            sArray.Add("total_fee", response.total_fee);
+            sArray.Add("trade_no", response.trade_no);
+            sArray.Add("trade_status", response.trade_status);
+            sArray.Add("sign", response.sign);
+            sArray.Add("sign_type", response.sign_type);
+            //var sArray = GetRequestGet();
+            return new AlipayMd5Notify(payConfig.Partner, payConfig.Key, payConfig.InputCharset, payConfig.SignType).Verify(sArray, response.notify_id, sign);
         }
 
         /// <summary>
         /// 处理支付返回信息 通过上下文获取请求信息
         /// </summary>
-        /// <param name="des">描述信息</param>
         /// <returns></returns>
-        public AlipayResponse GetResponse(string des)
+        public AlipayResponse GetResponse()
         {
             var alipayResponse = new AlipayResponse();
-            alipayResponse.NotifyId = HttpContext.Current.Request["notify_id"];
-            alipayResponse.Sign = HttpContext.Current.Request["sign"];
-            alipayResponse.OrderNo = HttpContext.Current.Request["out_trade_no"];
-            alipayResponse.PartnerEmail = HttpContext.Current.Request["seller_email"];
-            alipayResponse.Partner = HttpContext.Current.Request["seller_id"];
-            alipayResponse.OrderNo = HttpContext.Current.Request["trade_no"];
-            alipayResponse.PayDate = HttpContext.Current.Request["gmt_payment"];
-            alipayResponse.TotalAmount = HttpContext.Current.Request["price"];
-            alipayResponse.TradeStatus = HttpContext.Current.Request["trade_status"];
+            alipayResponse.body = HttpContext.Current.Request["body"];
+            alipayResponse.buyer_email = HttpContext.Current.Request["buyer_email"];
+            alipayResponse.buyer_id = HttpContext.Current.Request["buyer_id"];
+            alipayResponse.exterface = HttpContext.Current.Request["exterface"];
+            alipayResponse.is_success = HttpContext.Current.Request["is_success"];
+            alipayResponse.notify_id = HttpContext.Current.Request["notify_id"];
+            alipayResponse.notify_time = HttpContext.Current.Request["notify_time"];
+            alipayResponse.notify_type = HttpContext.Current.Request["notify_type"];
+            alipayResponse.out_trade_no = HttpContext.Current.Request["out_trade_no"];
+            alipayResponse.payment_type = HttpContext.Current.Request["payment_type"];
+            alipayResponse.seller_email = HttpContext.Current.Request["seller_email"];
+            alipayResponse.seller_id = HttpContext.Current.Request["seller_id"];
+            alipayResponse.subject = HttpContext.Current.Request["subject"];
+            alipayResponse.total_fee = HttpContext.Current.Request["total_fee"];
+            alipayResponse.trade_no = HttpContext.Current.Request["trade_no"];
+            alipayResponse.trade_status = HttpContext.Current.Request["trade_status"];
+            alipayResponse.sign = HttpContext.Current.Request["sign"];
+            alipayResponse.sign_type = HttpContext.Current.Request["sign_type"];
             return alipayResponse;
         }
 

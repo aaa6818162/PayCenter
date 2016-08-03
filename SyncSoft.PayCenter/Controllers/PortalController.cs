@@ -10,6 +10,7 @@ using SyncSoft.Payment;
 using SyncSoft.Payment.Business.Biz;
 using SyncSoft.Payment.Business.Biz.FApp;
 using SyncSoft.Payment.Domain.Request;
+using DataAccess = PayCenterSdk.DataAccess;
 
 //using SyncSoft.PayCenterSdk;
 //using SyncSoft.PayCenterSdk.Model;
@@ -26,13 +27,31 @@ namespace SyncSoft.PayCenter.Controllers
             return View();
         }
 
-        //public ActionResult ConfrimPay(PayEnum PayType)
-        //{
-        //    //建立请求
-        //    PayCenterRequest request = TestDictionary.GetTestByPartnerId();
-        //    string requestFrom = new PayCenterClient(PayType).GetRequestHtml(request);
-        //    return Content(requestFrom);
-        //}
+        public ActionResult ConfrimPay(PayEnum PayType)
+        {
+            var payCenterRequest = TestDictionary.GetTestByPartnerId();
+            //建立请求
+            switch (PayType)
+            {
+                case PayEnum.Alipay:
+                    var request = new GetRequestHtmlRequest();
+                    request.Partner = payCenterRequest.OrderNo;
+                    request.PayCenterPartner = payCenterRequest.Partner;
+                    request.UserName = payCenterRequest.UserName;
+                    request.UserId = payCenterRequest.UserId;
+                    request.OrderNo = payCenterRequest.OrderNo;
+                    request.PayRemark = payCenterRequest.PayRemark;
+                    request.TotalFee = payCenterRequest.TotalFee;
+                    request.SubmitTime = payCenterRequest.SubmitTime;
+                    request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+
+                    var requestFrom = new AlipayBiz().GetRequestHtml(request);
+
+                    return Content(requestFrom);
+
+            }
+            return View();
+        }
 
 
         public ActionResult Index()
@@ -55,7 +74,7 @@ namespace SyncSoft.PayCenter.Controllers
             payCenterRequest.PayCenterConfig = TestDictionary.GetTestByPartnerId().PayCenterConfig;
 
             //验证数据是否已被篡改
-            if (!new PayCenterClient().SignVerify(payCenterRequest, Request["Sign"]))
+            if (!new PayCenterServer().SignVerify(payCenterRequest, Request["Sign"]))
             {
                 ViewBag.Message = "数据已被篡改";
                 return View();
@@ -79,12 +98,12 @@ namespace SyncSoft.PayCenter.Controllers
                         request.PayRemark = payCenterRequest.PayRemark;
                         request.TotalFee = payCenterRequest.TotalFee;
                         request.SubmitTime = payCenterRequest.SubmitTime;
-                        request.PartnerPayConfig.AlipayConfig = DataAccess.GetAlipayConfig();
+                        request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
 
                         var requestFrom = new AlipayBiz().GetRequestHtml(request);
 
                         return Content(requestFrom);
-            
+
                 }
 
 
@@ -142,27 +161,33 @@ namespace SyncSoft.PayCenter.Controllers
 
         public ActionResult AlipayReturn()
         {
-            //var entity = new PayCenterClient(PayEnum.Alipay).GetRequestResult("支付宝同步");
-            ////获取配置信息
-            //PayCenterRequest request = TestDictionary.GetTestByPartnerId(entity.AlipayResponse.Partner);
-            //request.ThirdPayResponse = entity;
+            var entity = new AlipayBiz().GetResponse();
+            //获取配置信息
+            var config = SyncSoft.Payment.DataAccess.GetAlipayConfig();
 
-            //if (!new PayCenterClient(PayEnum.Alipay).SignVerify(request, entity.AlipayResponse.Sign))
-            //{
-            //    ViewBag.Message = "数据已被篡改";
-            //    return View();
-            //}
+            if (!new AlipayBiz().SignVerify(entity, config, entity.sign))
+            {
+                ViewBag.Message = "数据已被篡改";
+                return View();
+            }
 
-            //if (!entity.AlipayResponse.IsSuccess)
-            //{
-            //    ViewBag.Message = "交易失败";
-            //    return View();
-            //}
+            if (!entity.IsSuccess)
+            {
+                ViewBag.Message = "交易失败";
+                return View();
+            }
 
-            //request.IsSuccess = true;
-
-            //string requestFrom = new PayCenterClient(PayEnum.PayCenter).GetRequestHtml(request, false);
-            //return Content(requestFrom);
+            var payCenterResponse = new PayCenterResponse();
+            payCenterResponse.Partner = "111";
+            payCenterResponse.OrderNo = entity.out_trade_no;
+            payCenterResponse.PayType = PayEnum.Alipay;
+            payCenterResponse.ThridPaySerialNumber = entity.trade_no;
+            payCenterResponse.PayCenterSerialNumber = DateTime.Now.ToString();
+            payCenterResponse.PayTime = DateTime.Now;
+            payCenterResponse.IsSuccess = entity.IsSuccess;
+            payCenterResponse.PayCenterConfig = PayCenterSdk.DataAccess.GetPayCenterConfig();
+            string requestFrom = new PayCenterServer().GetResponseHtml(payCenterResponse);
+            return Content(requestFrom);
             return View();
         }
 

@@ -1,4 +1,5 @@
-﻿using SyncSoft.Payment.Config;
+﻿
+using SyncSoft.Payment.Config;
 
 namespace SyncSoft.Payment.Model.Config
 {

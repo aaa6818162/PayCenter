@@ -33,7 +33,7 @@ namespace SyncSoft.HHWebSite.Controllers
         /// <returns></returns>
         public ActionResult PayResult()
         {
-            //var t = new PayCenterClient().GetRequestResult().PayCenterResponse;
+            var request = new PayCenterClient().GePayCenterResponse();
 
             //if (string.IsNullOrEmpty(t.sign)
             //    || string.IsNullOrEmpty(t.sign_type)
@@ -48,28 +48,27 @@ namespace SyncSoft.HHWebSite.Controllers
             //    return View();
             //}
 
-            ////if ((DateTime.Now - submittime).TotalSeconds > 60)
-            ////{
-            ////    ViewBag.Message = "当前交易请求已超时";
-            ////    return View();
-            ////}
-
-            //var config = TestDictionary.GetTestByPartnerId();
-            //PayCenterRequest request = t;
-            //t.PartnerConfig = TestDictionary.GetTestByPartnerId().PartnerConfig;
-
-            ////验证数据是否已被篡改
-            //if (!new PayCenterClient(t.PayType).SignVerify(request, t.sign))
+            //if ((DateTime.Now - submittime).TotalSeconds > 60)
             //{
-            //    ViewBag.Message = "数据已被篡改";
+            //    ViewBag.Message = "当前交易请求已超时";
             //    return View();
             //}
 
-            //if (!t.IsSuccess)
-            //{
-            //    return View("Fail");
+            request.PayCenterConfig = DataAccess.GetPayCenterConfig();
 
-            //}
+
+            //验证数据是否已被篡改
+            if (!new PayCenterClient().SignVerify(request, Request["sign"]))
+            {
+                ViewBag.Message = "数据已被篡改";
+                return View();
+            }
+
+            if (!request.IsSuccess)
+            {
+                return View("Fail");
+
+            }
 
             return View("Success");
         }

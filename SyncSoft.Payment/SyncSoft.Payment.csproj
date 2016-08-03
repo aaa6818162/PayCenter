@@ -59,6 +59,7 @@
     <Compile Include="Business\Interface\ILogBiz.cs" />
     <Compile Include="Business\Interface\Base\IBasePayBiz.cs" />
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="DataAccess.cs" />
     <Compile Include="Domain\Response\AlipayResponse.cs" />
     <Compile Include="IOC\Container.cs" />
     <Compile Include="Model\Config\AlipayConfig.cs" />
@@ -66,13 +67,14 @@
     <Compile Include="Model\Config\CommBankConfig.cs" />
     <Compile Include="Model\Config\IcbcBankConfig.cs" />
     <Compile Include="Model\Config\PartnerPayConfig.cs" />
-    <Compile Include="Model\Config\PayCenterConfig.cs" />
+    <Compile Include="Model\Config\PayCenterConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\Config\TenpayConfig.cs" />
     <Compile Include="Domain\JsonBuilder.cs" />
     <Compile Include="Domain\Request\GetRequestHtmlRequest.cs" />
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tool\" />
