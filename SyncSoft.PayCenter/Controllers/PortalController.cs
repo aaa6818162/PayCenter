@@ -12,7 +12,6 @@ using SyncSoft.Payment.Business.Biz.FApp;
 using SyncSoft.Payment.Business.Interface.Base;
 using SyncSoft.Payment.Domain.Request;
 using SyncSoft.Payment.IOC;
-using DataAccess = PayCenterSdk.DataAccess;
 
 //using SyncSoft.PayCenterSdk;
 //using SyncSoft.PayCenterSdk.Model;
@@ -167,7 +166,7 @@ namespace SyncSoft.PayCenter.Controllers
             payCenterResponse.PayCenterSerialNumber = DateTime.Now.ToString();
             payCenterResponse.PayTime = DateTime.Now;
             payCenterResponse.IsSuccess = entity.IsSuccess;
-            payCenterResponse.PayCenterConfig = PayCenterSdk.DataAccess.GetPayCenterConfig();
+            payCenterResponse.PayCenterConfig = PayCenterSdk.DataAccessClient.GetPayCenterConfig();
             string requestFrom = new PayCenterServer().GetResponseHtml(payCenterResponse);
             return Content(requestFrom);
             return View();

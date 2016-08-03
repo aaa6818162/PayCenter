@@ -1,6 +1,6 @@
 ﻿namespace PayCenterSdk
 {
-    public class DataAccess
+    public class DataAccessClient
     {
  
 

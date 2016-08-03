@@ -54,7 +54,7 @@ namespace SyncSoft.HHWebSite.Controllers
             //    return View();
             //}
 
-            request.PayCenterConfig = DataAccess.GetPayCenterConfig();
+            request.PayCenterConfig = DataAccessClient.GetPayCenterConfig();
 
 
             //验证数据是否已被篡改
