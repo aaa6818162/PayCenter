@@ -8,6 +8,7 @@ using SyncSoft.PayCenterSdk.Config;
 using SyncSoft.PayCenterSdk.Model;
 using SyncSoft.PayCenterSdk.Request;
 using SyncSoft.PayCenterSdk.Response;
+using SyncSoft.PayCenterSdk.Service.Interface;
 using SyncSoft.PayCenterSdk.Tool;
 
 namespace SyncSoft.PayCenterSdk.Service

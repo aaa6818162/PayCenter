@@ -51,7 +51,6 @@
     <Compile Include="Config\IcbcBankConfig.cs" />
     <Compile Include="Config\TenpayConfig.cs" />
     <Compile Include="IOC\Container.cs" />
-    <Compile Include="Model\NotifyEnum.cs" />
     <Compile Include="Config\PartnerConfig.cs" />
     <Compile Include="Response\AlipayResponse.cs" />
     <Compile Include="Response\CmbBankResponse.cs" />

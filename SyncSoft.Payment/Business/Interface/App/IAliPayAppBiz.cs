@@ -1,4 +1,6 @@
-﻿namespace SyncSoft.Payment.Business.Interface
+﻿using SyncSoft.Payment.Business.Interface.Base;
+
+namespace SyncSoft.Payment.Business.Interface.App
 {
     /// <summary>
     /// 支付宝应用端接口

@@ -1,5 +1,6 @@
 ﻿using SyncSoft.Payment.Business.Biz.Base;
 using SyncSoft.Payment.Business.Interface;
+using SyncSoft.Payment.Business.Interface.App;
 
 namespace SyncSoft.Payment.Business.Biz.App
 {

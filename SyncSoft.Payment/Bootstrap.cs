@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SyncSoft.Payment.Business.Biz;
 using SyncSoft.Payment.Business.Biz.FApp;
 using SyncSoft.Payment.Business.Interface;
+using SyncSoft.Payment.Business.Interface.FApp;
 using SyncSoft.Payment.IOC;
 
 namespace SyncSoft.Payment

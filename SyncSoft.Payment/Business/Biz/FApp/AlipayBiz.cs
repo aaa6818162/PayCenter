@@ -5,6 +5,7 @@ using System.Web;
 using AlipaySdk.Md5;
 using SyncSoft.Payment.Business.Biz.Base;
 using SyncSoft.Payment.Business.Interface;
+using SyncSoft.Payment.Business.Interface.FApp;
 using SyncSoft.Payment.Config;
 using SyncSoft.Payment.Domain.Request;
 using SyncSoft.Payment.Domain.Response;
@@ -74,6 +75,7 @@ namespace SyncSoft.Payment.Business.Biz.FApp
         /// 通过支付宝交易号
         /// </summary>
         /// <param name="tradeNo"></param>
+        /// <param name="payConfig"></param>
         /// <returns></returns>
         public string QueryByTradeNo(string tradeNo, AlipayConfig payConfig)
         {
@@ -103,27 +105,6 @@ namespace SyncSoft.Payment.Business.Biz.FApp
             var getParams = isGet ? GetRequestGet() : GetRequestPost();
             return new AlipayMd5Notify(payConfig.Partner, payConfig.Key, payConfig.InputCharset, payConfig.HttpsVeryfyUrl).Verify(getParams, notify_id, sign);
         }
-
-        /// <summary>
-        /// 通过商户订单号
-        /// </summary>
-        /// <param name="outTradeNo"></param>
-        /// <returns></returns>
-        public string QueryByOutTradeNo(string outTradeNo)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 通过支付宝交易号
-        /// </summary>
-        /// <param name="outTradeNo"></param>
-        /// <returns></returns>
-        public string QueryByTradeNo(string outTradeNo)
-        {
-            throw new NotImplementedException();
-        }
-
 
         /// <summary>
         /// 处理支付返回信息 通过上下文获取请求信息

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
+using SyncSoft.PayCenterSdk.Service.Interface;
 
 namespace SyncSoft.PayCenterSdk.Service
 {

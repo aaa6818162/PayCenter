@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SyncSoft.Payment.Domain.Request;
+﻿using SyncSoft.Payment.Domain.Request;
 
-namespace SyncSoft.Payment.Business.Interface
+namespace SyncSoft.Payment.Business.Interface.Base
 {
     /// <summary>
     /// 非移动端
@@ -15,7 +10,5 @@ namespace SyncSoft.Payment.Business.Interface
         /// <returns></returns>
         string GetRequestHtml(GetRequestHtmlRequest request);
 
-
-       
     }
 }

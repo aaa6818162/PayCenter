@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SyncSoft.Payment.Business.Interface.Base;
 
-namespace SyncSoft.Payment.Business.Interface
+namespace SyncSoft.Payment.Business.Interface.App
 {
     public interface ICmbBankAppBiz : IBaseAppPayBiz
     {

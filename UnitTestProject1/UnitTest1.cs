@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SyncSoft.Payment;
 using SyncSoft.Payment.Business.Interface;
+using SyncSoft.Payment.Business.Interface.FApp;
 using SyncSoft.Payment.IOC;
 
 namespace UnitTestProject1
