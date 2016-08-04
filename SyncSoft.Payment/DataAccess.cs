@@ -38,5 +38,25 @@ namespace SyncSoft.Payment
         }
 
 
+        public static PartnerPayConfig GetPartnerPayConfig()
+        {
+            return new PartnerPayConfig()
+            {
+                AlipayConfig = GetAlipayConfig(),
+                PayCenterConfig = GetPayCenterConfig(),
+                CmbBankConfig = new CmbBankConfig()
+                {
+                    CmbGateway = "https://netpay.cmbchina.com/netpayment/BaseHttp.dll?PrePayC1?",
+                    CmbReturnUrl = "http://localhost:24131/Portal/CmbReturn",
+                    CmbKey = @"d:\bank\cmb\public.key",
+                    CmbBranchId = "0571",
+                    CmbCoNo = "007084",
+                    Password = "191688",
+                    Remark = "111"
+                }
+            };
+        }
+
+
     }
 }

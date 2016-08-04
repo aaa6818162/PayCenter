@@ -20,7 +20,7 @@ namespace SyncSoft.Payment.Domain.Request
         /// 
         /// </summary>
         /// <summary>
-        /// 支付宝商户号
+        /// 第三方商户号
         /// </summary>
         public string Partner { get; set; }
 

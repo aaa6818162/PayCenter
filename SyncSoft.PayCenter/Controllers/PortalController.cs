@@ -42,11 +42,11 @@ namespace SyncSoft.PayCenter.Controllers
             request.PayRemark = payCenterRequest.PayRemark;
             request.TotalFee = payCenterRequest.TotalFee;
             request.SubmitTime = payCenterRequest.SubmitTime;
-            request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+            request.PartnerPayConfig = DataAccess.GetPartnerPayConfig();
 
             var requestFrom = Container.Resolve<IBasePayBiz>(PayType.ToString()).GetRequestHtml(request);
 
-            log.LogInfo(requestFrom);
+            log.LogInfo(PayType.ToString()+requestFrom);
 
             return Content(requestFrom);
             return View();
@@ -105,7 +105,7 @@ namespace SyncSoft.PayCenter.Controllers
                     payCenterResponse.PayCenterSerialNumber = DateTime.Now.ToString();
                     payCenterResponse.PayTime = result.PayTime;
                     payCenterResponse.IsSuccess = result.IsSuccess;
-   
+
                     return Content(JsonConvert.SerializeObject(payCenterResponse));
 
                 }
@@ -120,8 +120,12 @@ namespace SyncSoft.PayCenter.Controllers
                     request.PayRemark = payCenterRequest.PayRemark;
                     request.TotalFee = payCenterRequest.TotalFee;
                     request.SubmitTime = payCenterRequest.SubmitTime;
-                    request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+
+                    request.PartnerPayConfig = DataAccess.GetPartnerPayConfig();
+
                     var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
+
+                    log.LogInfo(payCenterRequest.PayType.ToString() + requestFrom);
                     return Content(requestFrom);
                 }
 

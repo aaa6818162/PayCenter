@@ -18,7 +18,7 @@ namespace PayCenterSdk
                // PartnerToken="1111111",
                 UserName = "UserName",
                 UserId = "UserId",
-                OrderNo = DateTime.Now.ToString("yyyy-MM-dd HH"),
+                OrderNo = DateTime.Now.ToString("yyyyMMddHH"),
                 TotalFee = 0.01m,
                 PayRemark = "备注信息",
                 PayType = PayEnum.PayCenter,
