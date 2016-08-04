@@ -17,6 +17,12 @@ namespace Aop.Api.Response
         public string Code { get; set; }
 
         /// <summary>
+        /// 菜单唯一标识
+        /// </summary>
+        [XmlElement("menu_key")]
+        public string MenuKey { get; set; }
+
+        /// <summary>
         /// 结果描述
         /// </summary>
         [XmlElement("msg")]
@@ -28,5 +34,11 @@ namespace Aop.Api.Response
         [XmlArray("public_bind_accounts")]
         [XmlArrayItem("public_bind_account")]
         public List<PublicBindAccount> PublicBindAccounts { get; set; }
+
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        [XmlElement("remark")]
+        public string Remark { get; set; }
     }
 }

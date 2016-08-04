@@ -31,7 +31,7 @@ namespace Aop.Api.Test
             IDictionary<string, string> paramsMap = new Dictionary<string, string>();
             paramsMap.Add("appId", "2013092500031084");
             string privateKeyPem = GetCurrentPath() + "aop-sandbox-RSA-private-c#.pem";
-            string sign = AlipaySignature.RSASign(paramsMap, privateKeyPem, null);
+            string sign = AlipaySignature.RSASign(paramsMap, privateKeyPem, null,"RSA");
             paramsMap.Add("sign", sign);
             string publicKey = GetCurrentPath() + "public-key.pem";
             bool checkSign = AlipaySignature.RSACheckV2(paramsMap, publicKey);
@@ -83,7 +83,7 @@ namespace Aop.Api.Test
             paramsMap.Add("charset", charset);
             paramsMap.Add("service", "alipay.mobile.public.message.notify");
             paramsMap.Add("sign_type", "RSA");
-            paramsMap.Add("sign", AlipaySignature.RSASign(paramsMap, privateKeyPem,null));
+            paramsMap.Add("sign", AlipaySignature.RSASign(paramsMap, privateKeyPem,null,"RSA"));
 
             // —È«©&Ω‚√‹
             string resultContent = AlipaySignature.CheckSignAndDecrypt(paramsMap, publicKeyPem, privateKeyPem, true, true);

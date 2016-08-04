@@ -10,16 +10,27 @@ namespace Aop.Api.Request
     public class AlipayPassInstanceUpdateRequest : IAopRequest<AlipayPassInstanceUpdateResponse>
     {
         /// <summary>
-        /// 需要更新的券实例变量和状态信息
+        /// 详见<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.H6SjPp&treeId=50&articleId=103405&docType=1">文档中心文档</a>
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

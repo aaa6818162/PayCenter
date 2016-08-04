@@ -23,6 +23,12 @@ namespace Aop.Api.Response
         public string AddressCode { get; set; }
 
         /// <summary>
+        /// 支付宝用户ID
+        /// </summary>
+        [XmlElement("alipay_user_id")]
+        public string AlipayUserId { get; set; }
+
+        /// <summary>
         /// 区县名称。
         /// </summary>
         [XmlElement("area")]
@@ -33,6 +39,18 @@ namespace Aop.Api.Response
         /// </summary>
         [XmlElement("avatar")]
         public string Avatar { get; set; }
+
+        /// <summary>
+        /// 【注意】当is_balance_frozen为“F”时，改字段不会返回.  CTU ---- CTU冻结，允许用户开启  ALIBABA ---- ALIBABA冻结，允许用户开启  SERVER ---- 后台冻结，允许用户开启  USER ----  用户冻结   CTU_N---- CTU冻结，不允许用户开启  ALIBABA_N ---- ALIBABA冻结，不允许用户开启  SERVER_N ---- 后台冻结，不允许用户开启  UNKNOWN ---- 降级、或查询超时
+        /// </summary>
+        [XmlElement("balance_freeze_type")]
+        public string BalanceFreezeType { get; set; }
+
+        /// <summary>
+        /// 用户生日
+        /// </summary>
+        [XmlElement("birthday")]
+        public string Birthday { get; set; }
 
         /// <summary>
         /// 证件号码
@@ -108,6 +126,12 @@ namespace Aop.Api.Response
         public string Email { get; set; }
 
         /// <summary>
+        /// 姓氏，取的是realName中的首个字符，对非中文、中文复姓支持较差。
+        /// </summary>
+        [XmlElement("family_name")]
+        public string FamilyName { get; set; }
+
+        /// <summary>
         /// 公司名称（用户类型是公司类型时公司名称才有此字段）。
         /// </summary>
         [XmlElement("firm_name")]
@@ -120,6 +144,12 @@ namespace Aop.Api.Response
         public string Gender { get; set; }
 
         /// <summary>
+        /// T--被冻结；F--未冻结
+        /// </summary>
+        [XmlElement("is_balance_frozen")]
+        public string IsBalanceFrozen { get; set; }
+
+        /// <summary>
         /// T为是银行卡认证，F为非银行卡认证。
         /// </summary>
         [XmlElement("is_bank_auth")]
@@ -130,6 +160,12 @@ namespace Aop.Api.Response
         /// </summary>
         [XmlElement("is_certified")]
         public string IsCertified { get; set; }
+
+        /// <summary>
+        /// T：表示A类实名认证；F：表示非A类实名认证
+        /// </summary>
+        [XmlElement("is_certify_grade_a")]
+        public string IsCertifyGradeA { get; set; }
 
         /// <summary>
         /// T为是身份证认证，F为非身份证认证。
@@ -156,10 +192,22 @@ namespace Aop.Api.Response
         public string IsStudentCertified { get; set; }
 
         /// <summary>
+        /// 脱敏登录号。脱敏后的登录号，部分字符被遮盖.
+        /// </summary>
+        [XmlElement("masked_logon_id")]
+        public string MaskedLogonId { get; set; }
+
+        /// <summary>
         /// 手机号码。
         /// </summary>
         [XmlElement("mobile")]
         public string Mobile { get; set; }
+
+        /// <summary>
+        /// 用户昵称
+        /// </summary>
+        [XmlElement("nick_name")]
+        public string NickName { get; set; }
 
         /// <summary>
         /// 电话号码。
@@ -178,6 +226,12 @@ namespace Aop.Api.Response
         /// </summary>
         [XmlElement("real_name")]
         public string RealName { get; set; }
+
+        /// <summary>
+        /// 生日的月和日，MMdd格式
+        /// </summary>
+        [XmlElement("reduced_birthday")]
+        public string ReducedBirthday { get; set; }
 
         /// <summary>
         /// 用户的userId

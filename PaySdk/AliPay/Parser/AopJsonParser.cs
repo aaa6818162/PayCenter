@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 using Jayrock.Json.Conversion;
 using Aop.Api.Request;
+using Aop.Api.Util;
 
 namespace Aop.Api.Parser
 {
@@ -56,19 +57,18 @@ namespace Aop.Api.Parser
         }
 
 
-        public SignItem GetSignItem(IAopRequest<T> request, T response)
+        public SignItem GetSignItem(IAopRequest<T> request, string responseBody)
         {
-            string body = response.Body;
-            if (string.IsNullOrEmpty(body))
+            if (string.IsNullOrEmpty(responseBody))
             {
                 return null;
             }
 
             SignItem signItem = new SignItem();
-            string sign = GetSign(body);
+            string sign = GetSign(responseBody);
             signItem.Sign = sign;
 
-            string signSourceData = GetSignSourceData(request, body);
+            string signSourceData = GetSignSourceData(request, responseBody);
             signItem.SignSourceDate = signSourceData;
 
             return signItem;
@@ -245,6 +245,80 @@ namespace Aop.Api.Parser
             int length = signDataEndIndex - signDataStartIndex;
 
             return body.Substring(signDataStartIndex, length);
+        }
+
+
+        public string EncryptSourceData(IAopRequest<T> request, string body, string encryptType, string encryptKey, string charset)
+        {
+
+            if (!"AES".Equals(encryptType))
+            {
+                throw new AopException("API only support AES!");
+            }
+
+            EncryptParseItem item = parseEncryptData(request, body);
+
+            string bodyIndexContent = body.Substring(0, item.startIndex);
+            string bodyEndexContent = body.Substring(item.endIndex);
+
+            //TODO 解密逻辑
+            string bizContent = AlipayEncrypt.AesDencrypt(encryptKey, item.encryptContent, charset);
+
+            return bodyIndexContent + bizContent + bodyEndexContent;
+        }
+
+
+
+        /// <summary>
+        /// 解析加密节点
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        private static EncryptParseItem parseEncryptData(IAopRequest<T> request, string body)
+        {
+            string rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
+            string errorRootNode = AlipayConstants.ERROR_RESPONSE;
+
+            int indexOfRootNode = body.IndexOf(rootNode);
+            int indexOfErrorRoot = body.IndexOf(errorRootNode);
+
+            EncryptParseItem result = null;
+            if (indexOfRootNode > 0)
+            {
+                result = ParseEncryptItem(body, rootNode, indexOfRootNode);
+            }
+            else if (indexOfErrorRoot > 0)
+            {
+                result = ParseEncryptItem(body, errorRootNode, indexOfErrorRoot);
+            }
+
+            return result;
+        }
+
+        private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
+        {
+            int signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
+            int indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"");
+
+            int signDataEndIndex = indexOfSign - 1;
+
+            if (signDataEndIndex < 0)
+            {
+                signDataEndIndex = body.Length - 1;
+            }
+
+            int length = signDataEndIndex - signDataStartIndex;
+
+            string encyptContent = body.Substring(signDataStartIndex + 1, length - 2);
+
+            EncryptParseItem item = new EncryptParseItem();
+            item.encryptContent = encyptContent;
+            item.startIndex = signDataStartIndex;
+            item.endIndex = signDataEndIndex;
+
+
+            return item;
         }
     }
 }

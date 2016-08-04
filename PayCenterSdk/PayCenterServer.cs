@@ -122,6 +122,8 @@ namespace PayCenterSdk
             request.TotalFee = Convert.ToDecimal(HttpContext.Current.Request["TotalFee"]);
             request.SubmitTime = DateTime.Parse(HttpContext.Current.Request["SubmitTime"]);
             request.PayType = (PayEnum)PayEnum.Parse(typeof(PayEnum), HttpContext.Current.Request["PayType"]);
+
+            request.Ext_dynamic_id = HttpContext.Current.Request["Ext_dynamic_id"];
             return request; ;
         }
     }

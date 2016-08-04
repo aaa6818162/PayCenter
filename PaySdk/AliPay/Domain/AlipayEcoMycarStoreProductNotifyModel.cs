@@ -22,6 +22,12 @@ namespace Aop.Api.Domain
         public string BizStatusTxt { get; set; }
 
         /// <summary>
+        /// 拓展参数，区分4S厂商  {”remark”:”DFRC”}  日产- DFRC,  北现- BJXD
+        /// </summary>
+        [XmlElement("ext_param")]
+        public string ExtParam { get; set; }
+
+        /// <summary>
         /// 业务订单编号
         /// </summary>
         [XmlElement("out_order_no")]

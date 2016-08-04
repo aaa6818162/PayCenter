@@ -1,4 +1,5 @@
 using System;
+using Aop.Api.Domain;
 using System.Collections.Generic;
 using Aop.Api.Response;
 
@@ -10,16 +11,27 @@ namespace Aop.Api.Request
     public class MonitorHeartbeatSynRequest : IAopRequest<MonitorHeartbeatSynResponse>
     {
         /// <summary>
-        /// 验签时该参数不做任何处理
+        /// 通过同步商户终端信息，保障商户收银效果。
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

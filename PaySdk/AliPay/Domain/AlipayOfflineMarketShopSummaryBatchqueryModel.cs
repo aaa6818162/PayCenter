@@ -28,13 +28,13 @@ namespace Aop.Api.Domain
         public long PageSize { get; set; }
 
         /// <summary>
-        /// 门店数据查询类型，根据类型可以返回指定的门店数据，目前支持的类型如下：  BRAND_RELATION ： 品牌商关联店铺  MALL_SELF ：MALL自己的门店  MALL_RELATION：MALL关联下的门店
+        /// BRAND_RELATION ： 品牌商关联店铺  MALL_SELF ：MALL自己的门店  MALL_RELATION：MALL关联下的门店
         /// </summary>
         [XmlElement("query_type")]
         public string QueryType { get; set; }
 
         /// <summary>
-        /// query_type查询类型下所关联的商户PID
+        /// 当前查询类型下所关联的商户PID
         /// </summary>
         [XmlElement("related_partner_id")]
         public string RelatedPartnerId { get; set; }

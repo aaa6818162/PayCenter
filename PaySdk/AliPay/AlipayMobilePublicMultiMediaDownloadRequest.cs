@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 using System.Text;
 using Aop.Api.Response;
@@ -19,6 +18,19 @@ namespace Aop.Api.Request
         private string terminalInfo;
         private string prodCode;
         private string notifyUrl;
+        private bool needEncrypt = false;
+
+
+      public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
+        }
+
+   
+      public  bool GetNeedEncrypt()
+        {
+            return this.needEncrypt;
+        }
 
         public void SetNotifyUrl(string notifyUrl)
         {

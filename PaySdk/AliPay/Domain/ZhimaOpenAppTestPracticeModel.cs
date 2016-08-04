@@ -18,6 +18,24 @@ namespace Aop.Api.Domain
         public List<string> Add { get; set; }
 
         /// <summary>
+        /// ad
+        /// </summary>
+        [XmlElement("dddd")]
+        public string Dddd { get; set; }
+
+        /// <summary>
+        /// ddd
+        /// </summary>
+        [XmlElement("fff")]
+        public string Fff { get; set; }
+
+        /// <summary>
+        /// cc
+        /// </summary>
+        [XmlElement("ggg")]
+        public string Ggg { get; set; }
+
+        /// <summary>
         /// zzz
         /// </summary>
         [XmlElement("xxxx")]

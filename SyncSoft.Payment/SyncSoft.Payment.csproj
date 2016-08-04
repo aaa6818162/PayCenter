@@ -60,10 +60,14 @@
     <Compile Include="Business\Interface\Base\IBasePayBiz.cs" />
     <Compile Include="Bootstrap.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Domain\Request\tradePayRequest.cs" />
     <Compile Include="Domain\Response\AlipayResponse.cs" />
     <Compile Include="IOC\Container2.cs" />
     <Compile Include="IOC\Container.cs" />
     <Compile Include="Model\Config\AlipayConfig.cs" />
+    <Compile Include="Model\Config\AlipayAppConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\Config\CmbBankConfig.cs" />
     <Compile Include="Model\Config\CommBankConfig.cs" />
     <Compile Include="Model\Config\IcbcBankConfig.cs" />
@@ -84,6 +88,14 @@
     <ProjectReference Include="..\AlipaySdk\AlipaySdk.csproj">
       <Project>{22ce3df8-09b7-4412-8f56-44f14697af38}</Project>
       <Name>AlipaySdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F2FPayDll\F2FPayDll.csproj">
+      <Project>{ec6da18d-0532-4e73-ba69-a575a724c8bb}</Project>
+      <Name>F2FPayDll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaySdk\AliPay\AopSdk.csproj">
+      <Project>{9c11cae5-5188-4e71-825b-68fc3135728a}</Project>
+      <Name>AopSdk</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

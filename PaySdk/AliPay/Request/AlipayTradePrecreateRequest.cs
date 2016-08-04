@@ -1,4 +1,5 @@
 using System;
+using Aop.Api.Domain;
 using System.Collections.Generic;
 using Aop.Api.Response;
 
@@ -10,16 +11,27 @@ namespace Aop.Api.Request
     public class AlipayTradePrecreateRequest : IAopRequest<AlipayTradePrecreateResponse>
     {
         /// <summary>
-        /// 业务请求接口的参数体，JSON格式，具体包含的内容参见各个接口的请求参数
+        /// 收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给伤脑筋户，由用户扫描二维码完成订单支付。  修改路由策略到R
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

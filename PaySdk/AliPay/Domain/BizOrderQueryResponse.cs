@@ -64,7 +64,7 @@ namespace Aop.Api.Domain
         public string RequestId { get; set; }
 
         /// <summary>
-        /// 流水处理结果码
+        /// 流水处理结果码  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.lL9hGI&treeId=78&articleId=103834&docType=1#s2">点此查看</a>
         /// </summary>
         [XmlElement("result_code")]
         public string ResultCode { get; set; }

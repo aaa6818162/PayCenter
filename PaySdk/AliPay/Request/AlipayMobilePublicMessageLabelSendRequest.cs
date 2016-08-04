@@ -10,16 +10,27 @@ namespace Aop.Api.Request
     public class AlipayMobilePublicMessageLabelSendRequest : IAopRequest<AlipayMobilePublicMessageLabelSendResponse>
     {
         /// <summary>
-        /// 业务内容
+        /// json串，<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7386797.0.0.2crAC1&treeId=53&articleId=103511&docType=1">详情请见</a>
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

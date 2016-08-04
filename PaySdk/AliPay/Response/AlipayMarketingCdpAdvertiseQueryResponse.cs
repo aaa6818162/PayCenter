@@ -27,13 +27,13 @@ namespace Aop.Api.Response
         public string AdRules { get; set; }
 
         /// <summary>
-        /// 广告内容。如果广告类型是HTML5，则传入H5链接地址，建议为https协议。最大尺寸不得超过1242px＊242px，小屏幕将按分辨率宽度同比例放大缩小；如果类型是图片，则传入图片ID标识，如何获取图片ID参考图片上传接口：alipay.offline.material.image.upload。图片尺寸为1242px＊290px。图片大小不能超过50kb。
+        /// 广告内容。如果广告类型是HTML5，则传入H5链接地址，必须为https协议。最大尺寸不得超过1242px＊242px，小屏幕将按分辨率宽度同比例放大缩小；如果类型是图片，则传入图片ID标识，如何获取图片ID参考图片上传接口：alipay.offline.material.image.upload。图片尺寸为1242px＊290px。图片大小不能超过50kb。
         /// </summary>
         [XmlElement("content")]
         public string Content { get; set; }
 
         /// <summary>
-        /// 广告内容类型，目前包括HTML5和图片，分别传入：URL和PIC
+        /// 广告内容类型，目前包括HTML5和图片，分别传入：H5和PIC
         /// </summary>
         [XmlElement("content_type")]
         public string ContentType { get; set; }

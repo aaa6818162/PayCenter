@@ -22,7 +22,7 @@ namespace Aop.Api.Domain
         public string OpId { get; set; }
 
         /// <summary>
-        /// 要撤销的订单ID，当店铺创建、修改接口迁移至2.0时，同步返回的apply_id可以用作此接口的入参。
+        /// 要撤销的订单ID
         /// </summary>
         [XmlElement("order_id")]
         public string OrderId { get; set; }

@@ -8,6 +8,7 @@ using PayCenterSdk;
 using PayCenterSdk.Model;
 using SyncSoft.Payment;
 using SyncSoft.Payment.Business.Biz;
+using SyncSoft.Payment.Business.Biz.App;
 using SyncSoft.Payment.Business.Biz.FApp;
 using SyncSoft.Payment.Business.Interface.Base;
 using SyncSoft.Payment.Domain.Request;
@@ -47,7 +48,7 @@ namespace SyncSoft.PayCenter.Controllers
             return View();
         }
 
-
+        [HttpPost]
         public ActionResult Index()
         {
             var payCenterRequest = new PayCenterServer().GetRequest();
@@ -80,18 +81,30 @@ namespace SyncSoft.PayCenter.Controllers
             }
             else
             {
-                var request = new GetRequestHtmlRequest();
-                request.Partner = payCenterRequest.OrderNo;
-                request.PayCenterPartner = payCenterRequest.Partner;
-                request.UserName = payCenterRequest.UserName;
-                request.UserId = payCenterRequest.UserId;
-                request.OrderNo = payCenterRequest.OrderNo;
-                request.PayRemark = payCenterRequest.PayRemark;
-                request.TotalFee = payCenterRequest.TotalFee;
-                request.SubmitTime = payCenterRequest.SubmitTime;
-                request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
-                var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
-                return Content(requestFrom);
+                if (payCenterRequest.PayType==PayEnum.AlipayTM)
+                {
+
+                    new AliPayAppBiz().tradePay(Request["Ext_dynamic_id"]);
+                }
+                else
+                {
+                    var request = new GetRequestHtmlRequest();
+                    request.Partner = payCenterRequest.OrderNo;
+                    request.PayCenterPartner = payCenterRequest.Partner;
+                    request.UserName = payCenterRequest.UserName;
+                    request.UserId = payCenterRequest.UserId;
+                    request.OrderNo = payCenterRequest.OrderNo;
+                    request.PayRemark = payCenterRequest.PayRemark;
+                    request.TotalFee = payCenterRequest.TotalFee;
+                    request.SubmitTime = payCenterRequest.SubmitTime;
+                    request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
+                    var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
+                    return Content(requestFrom);
+                }
+
+
+
+               
 
                 return View();
             }

@@ -1,4 +1,5 @@
 using System;
+using Aop.Api.Domain;
 using System.Collections.Generic;
 using Aop.Api.Response;
 
@@ -10,7 +11,7 @@ namespace Aop.Api.Request
     public class AlipayMobileStdPublicAccountQueryRequest : IAopRequest<AlipayMobileStdPublicAccountQueryResponse>
     {
         /// <summary>
-        /// 业务信息：userId，这是个json字段
+        /// 当用户成为商户的关注用户之后，则商户可以通过本接口查询关注者的绑定账户，以便补全异常情况下的单边账户数据。
         /// </summary>
         public string BizContent { get; set; }
 

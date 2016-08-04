@@ -40,6 +40,12 @@ namespace Aop.Api.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
+        /// 该笔请求的唯一编号，强校验，控制幂等性
+        /// </summary>
+        [XmlElement("request_id")]
+        public string RequestId { get; set; }
+
+        /// <summary>
         /// 交易号
         /// </summary>
         [XmlElement("trade_no")]

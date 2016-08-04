@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Aop.Api.Request;
+using Aop.Api.Util;
 
 namespace Aop.Api.Parser
 {
@@ -59,19 +60,19 @@ namespace Aop.Api.Parser
         }
 
 
-        public SignItem GetSignItem(IAopRequest<T> request, T response)
+        public SignItem GetSignItem(IAopRequest<T> request, string reponseBody)
         {
-            string body = response.Body;
-            if (string.IsNullOrEmpty(body))
+          
+            if (string.IsNullOrEmpty(reponseBody))
             {
                 return null;
             }
 
             SignItem signItem = new SignItem();
-            string sign = GetSign(body);
+            string sign = GetSign(reponseBody);
             signItem.Sign = sign;
 
-            string signSourceData = GetSignSourceData(request, body);
+            string signSourceData = GetSignSourceData(request, reponseBody);
             signItem.SignSourceDate = signSourceData;
 
             return signItem;
@@ -149,6 +150,74 @@ namespace Aop.Api.Parser
             int signDataEndIndex = indexOfSign;
 
             return body.Substring(signDataStartIndex, signDataEndIndex - signDataStartIndex);
+        }
+
+
+        public string EncryptSourceData(IAopRequest<T> request, string body, string encryptType, string encryptKey, string charset)
+        {
+            EncryptParseItem item = ParseEncryptData(request, body);
+
+            string bodyIndexContent = body.Substring(0, item.startIndex);
+            string bodyEndContent = body.Substring(item.endIndex);
+            string encryptContent = AlipayEncrypt.AesDencrypt(encryptKey, item.encryptContent, charset);
+
+            return bodyIndexContent + encryptContent + bodyEndContent;
+        }
+
+
+        private static EncryptParseItem ParseEncryptData(IAopRequest<T> request, string body)
+        {
+            string rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
+            string errorRootNode = AlipayConstants.ERROR_RESPONSE;
+
+            int indexOfRootNode = body.IndexOf(rootNode);
+            int indexOfErrorRoot = body.IndexOf(errorRootNode);
+
+            EncryptParseItem result = null;
+            if (indexOfRootNode > 0)
+            {
+                result = ParseEncryptItem(body, rootNode, indexOfRootNode);
+            }
+            else if (indexOfErrorRoot > 0)
+            {
+                result = ParseEncryptItem(body, errorRootNode, indexOfErrorRoot);
+            }
+
+            return result;
+        }
+
+        private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
+        {
+
+            //  第一个字母+长度+>
+            int signDataStartIndex = indexOfRootNode + rootNode.Length + 1;
+
+            string xmlStartNode = "<" + AlipayConstants.ENCRYPT_NODE_NAME + ">";
+            string xmlEndNode = "</" + AlipayConstants.ENCRYPT_NODE_NAME + ">";
+            int indexOfEncryptNode = body.IndexOf(xmlEndNode);
+
+            if (indexOfEncryptNode < 0)
+            {
+                EncryptParseItem item = new EncryptParseItem();
+                item.encryptContent = null;
+                item.startIndex = 0;
+                item.endIndex = 0;
+
+                return item;
+            }
+
+            int startIndex = signDataStartIndex + xmlStartNode.Length;
+            int bizLen = indexOfEncryptNode - startIndex;
+
+            string encryptBizContent = body.Substring(startIndex, bizLen);
+
+            EncryptParseItem item2 = new EncryptParseItem();
+            item2.encryptContent = encryptBizContent;
+            item2.startIndex = signDataStartIndex;
+            item2.endIndex = indexOfEncryptNode + xmlEndNode.Length;
+
+            return item2;
+
         }
 
     }

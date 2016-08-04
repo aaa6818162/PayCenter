@@ -39,12 +39,28 @@ namespace Aop.Api.Request
         /// </summary>
         public string RequestFrom { get; set; }
 
+        /// <summary>
+        /// 模板Id
+        /// </summary>
+        public string TemplateId { get; set; }
+
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;
@@ -100,6 +116,7 @@ namespace Aop.Api.Request
             parameters.Add("ext_info", this.ExtInfo);
             parameters.Add("external_card_no", this.ExternalCardNo);
             parameters.Add("request_from", this.RequestFrom);
+            parameters.Add("template_id", this.TemplateId);
             return parameters;
         }
 

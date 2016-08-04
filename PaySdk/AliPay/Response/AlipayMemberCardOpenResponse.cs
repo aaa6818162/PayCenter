@@ -1,5 +1,7 @@
 using System;
 using System.Xml.Serialization;
+using System.Collections.Generic;
+using Aop.Api.Domain;
 
 namespace Aop.Api.Response
 {
@@ -25,6 +27,13 @@ namespace Aop.Api.Response
         /// </summary>
         [XmlElement("error_msg")]
         public string ErrorMsg { get; set; }
+
+        /// <summary>
+        /// asd
+        /// </summary>
+        [XmlArray("sdfsdf")]
+        [XmlArrayItem("micro_pay_notify")]
+        public List<MicroPayNotify> Sdfsdf { get; set; }
 
         /// <summary>
         /// 请求是否成功。  T代表成功  F代表失败

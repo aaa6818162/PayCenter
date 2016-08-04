@@ -72,7 +72,7 @@ namespace Aop.Api.Domain
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 二级商户信息,当前只对特殊银行机构特定场景下使用此字段
+        /// 二级商户信息
         /// </summary>
         [XmlElement("sub_merchant")]
         public SubMerchant SubMerchant { get; set; }

@@ -11,6 +11,12 @@ namespace Aop.Api.Response
     public class AlipayDataDataexchangeSfasdfResponse : AopResponse
     {
         /// <summary>
+        /// dfghjkghgdfsa
+        /// </summary>
+        [XmlElement("adasdassdfg")]
+        public XXXXsdasdasd Adasdassdfg { get; set; }
+
+        /// <summary>
         /// dsfagshdj
         /// </summary>
         [XmlArray("azxfghd")]

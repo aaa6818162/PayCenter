@@ -11,6 +11,13 @@ namespace Aop.Api.Domain
     public class Data : AopObject
     {
         /// <summary>
+        /// 对应userIdList，标准Alipay UserId列表
+        /// </summary>
+        [XmlArray("alipay_user_id_list")]
+        [XmlArrayItem("string")]
+        public List<string> AlipayUserIdList { get; set; }
+
+        /// <summary>
         /// 用户id列表
         /// </summary>
         [XmlArray("user_id_list")]

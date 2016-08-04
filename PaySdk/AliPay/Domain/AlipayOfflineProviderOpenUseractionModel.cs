@@ -52,10 +52,28 @@ namespace Aop.Api.Domain
         public string Industry { get; set; }
 
         /// <summary>
+        /// 电话号码
+        /// </summary>
+        [XmlElement("mobile")]
+        public string Mobile { get; set; }
+
+        /// <summary>
         /// 合作店铺对象 信息
         /// </summary>
         [XmlElement("outer_shop_do")]
         public OuterShopDO OuterShopDo { get; set; }
+
+        /// <summary>
+        /// Source对应平台用户ID
+        /// </summary>
+        [XmlElement("platform_user_id")]
+        public string PlatformUserId { get; set; }
+
+        /// <summary>
+        /// 平台来源域名
+        /// </summary>
+        [XmlElement("source")]
+        public string Source { get; set; }
 
         /// <summary>
         /// source对应平台的id

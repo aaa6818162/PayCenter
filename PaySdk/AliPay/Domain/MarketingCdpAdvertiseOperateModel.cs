@@ -16,7 +16,7 @@ namespace Aop.Api.Domain
         public string AdId { get; set; }
 
         /// <summary>
-        /// 操作类型，目前包括上线和下线，分别传入：online(ONLINE)和offline(OFFLINE)
+        /// 操作类型，目前包括上线和下线，分别传入：online和offline
         /// </summary>
         [XmlElement("operate_type")]
         public string OperateType { get; set; }

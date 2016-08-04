@@ -34,12 +34,6 @@ namespace Aop.Api.Domain
         public string AvgPrice { get; set; }
 
         /// <summary>
-        /// 新接入的ISV或者准备升级到2.0开店签约一体化的接口需要传入2.0。2.0的接口支持商户开店签约一体化，支持门店状态被动通知，支持门店审核状态查询等功能
-        /// </summary>
-        [XmlElement("biz_version")]
-        public string BizVersion { get; set; }
-
-        /// <summary>
         /// 包厢支持，T表示有包厢，F表示无包厢；不传值默认F；
         /// </summary>
         [XmlElement("box")]
@@ -184,13 +178,13 @@ namespace Aop.Api.Domain
         public string NotifyMobile { get; set; }
 
         /// <summary>
-        /// 在其他平台的开店图片，该字段在接口升级到biz_version=2.0版本后废弃
+        /// 在其他平台的开店图片，该字段在接口升级到version=2.0版本后废弃
         /// </summary>
         [XmlElement("online_image")]
         public string OnlineImage { get; set; }
 
         /// <summary>
-        /// 其他平台开店的店铺链接url,多个url使用英文逗号隔开，isv迁移到新接口使用此字段，与is_operating_online=T配套使用。online_image升级到biz_version=2.0版本后将废弃，使用online_url替代。
+        /// 其他平台开店的店铺链接url,多个url使用英文逗号隔开，isv迁移到新接口使用此字段，与is_operating_online=T配套使用。online_image升级到version=2.0版本后将废弃，使用online_url替代。
         /// </summary>
         [XmlElement("online_url")]
         public string OnlineUrl { get; set; }
@@ -202,7 +196,7 @@ namespace Aop.Api.Domain
         public string OpId { get; set; }
 
         /// <summary>
-        /// 如业务参数中传递了biz_version=2.0，则此字段默认不传和传入ISV的情况下，表示为ISV在调用接口；PROVIDER（支付宝内部使用字段）。2.0接口将不再支持传入MERCHANT字段。
+        /// 支付宝内部使用，外部商户不需要填写此字段。操作角色；MERCHANT或PROVIDER,非授权模式填写PROVIDER,授权模式填写MERCHANT，默认是MERCHANT。  version=2.0接口，此字段有调整，默认不传是ISV角色，ISV也可以显式传入ISV，服务商角色只能传入PROVIDER。此字段主要用来区分ISV跟PROVIDER的角色类型。2.0接口将不再支持传入MERCHANT字段。
         /// </summary>
         [XmlElement("op_role")]
         public string OpRole { get; set; }

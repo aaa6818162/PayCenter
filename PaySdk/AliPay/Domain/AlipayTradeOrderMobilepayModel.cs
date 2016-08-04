@@ -28,6 +28,12 @@ namespace Aop.Api.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
+        /// 销售产品码，商家和支付宝签约的产品码
+        /// </summary>
+        [XmlElement("product_code")]
+        public string ProductCode { get; set; }
+
+        /// <summary>
         /// 收款支付宝用户ID。 如果该值为空，则默认为商户签约账号对应的支付宝用户ID
         /// </summary>
         [XmlElement("seller_id")]

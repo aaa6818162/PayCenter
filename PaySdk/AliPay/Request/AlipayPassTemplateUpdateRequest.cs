@@ -10,16 +10,27 @@ namespace Aop.Api.Request
     public class AlipayPassTemplateUpdateRequest : IAopRequest<AlipayPassTemplateUpdateResponse>
     {
         /// <summary>
-        /// 控制卡券展示的模板内容信息，遵循JSON规范
+        /// 详见<a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.LrFyGS&treeId=50&articleId=103396&docType=1">文档中心文档</a>
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

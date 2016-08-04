@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Confirm2", "Order", FormMethod.Post))
+        {
+            <select name="PayEnum">
+
+                <option value="AlipayTM">支付宝扫码</option>
+                <option value="AlipayEW">支付宝二维码</option>
+            </select>
+
+            <input type="text" value="" name="Ext_dynamic_id" />
+
+            <input type="submit" id="btnSubmit" value="确认订单" />
+        }
+    </div>
+    @*<script type="text/javascript">
+            $(function() {
+
+                $("#btnSubmit").bind("click", function() {
+
+                    var msg = $.ajax({
+                        type: "POST",
+                        url: "/Order/Confirm",
+                        data: "orderNo=111",
+                        cache: false,
+                        async: false
+                    }).responseText;
+
+                   // var data = jQuery.parseJSON(msg);
+                });
+
+            });
+        </script>*@
+</body>
+</html>

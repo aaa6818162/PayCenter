@@ -22,6 +22,24 @@ namespace Aop.Api.Domain
         public string Amount { get; set; }
 
         /// <summary>
+        /// 资产类型编码
+        /// </summary>
+        [XmlElement("assert_type_code")]
+        public string AssertTypeCode { get; set; }
+
+        /// <summary>
+        /// 银行卡支付工具类型
+        /// </summary>
+        [XmlElement("bank_card_pay_type")]
+        public string BankCardPayType { get; set; }
+
+        /// <summary>
+        /// 银行卡类型
+        /// </summary>
+        [XmlElement("bank_card_type")]
+        public string BankCardType { get; set; }
+
+        /// <summary>
         /// 业务ID
         /// </summary>
         [XmlElement("biz_id")]
@@ -44,6 +62,12 @@ namespace Aop.Api.Domain
         /// </summary>
         [XmlElement("biz_type")]
         public string BizType { get; set; }
+
+        /// <summary>
+        /// 币种（数字形式）
+        /// </summary>
+        [XmlElement("currency")]
+        public string Currency { get; set; }
 
         /// <summary>
         /// 充退金额
@@ -178,6 +202,12 @@ namespace Aop.Api.Domain
         public string FundToolTypeForSystem { get; set; }
 
         /// <summary>
+        /// 资金工具名字（中文），供外部直接展示用。
+        /// </summary>
+        [XmlElement("fund_tool_type_name")]
+        public string FundToolTypeName { get; set; }
+
+        /// <summary>
         /// 业务创建时间
         /// </summary>
         [XmlElement("gmt_biz_create")]
@@ -202,6 +232,12 @@ namespace Aop.Api.Domain
         public string OppositeFundCardNo { get; set; }
 
         /// <summary>
+        /// 外部请求号
+        /// </summary>
+        [XmlElement("out_request_no")]
+        public string OutRequestNo { get; set; }
+
+        /// <summary>
         /// 本方卡号
         /// </summary>
         [XmlElement("owner_card_no")]
@@ -212,6 +248,12 @@ namespace Aop.Api.Domain
         /// </summary>
         [XmlElement("refund_bank_status")]
         public string RefundBankStatus { get; set; }
+
+        /// <summary>
+        /// 预付子卡类型
+        /// </summary>
+        [XmlElement("sub_prepaid_card_type")]
+        public string SubPrepaidCardType { get; set; }
 
         /// <summary>
         /// 统一支付ID

@@ -14,8 +14,15 @@ namespace SyncSoft.HHWebSite.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            new PayCenterClient().GetPayCenterConfig(  "1111","http://localhost:24131/api/PayCenterConfig/GetPayCenterConfig?"
-              );
+            //new PayCenterClient().GetPayCenterConfig(  "1111","http://localhost:24131/api/PayCenterConfig/GetPayCenterConfig?"
+            //  );
+            return View();
+        }
+
+        public ActionResult Index2()
+        {
+            //new PayCenterClient().GetPayCenterConfig(  "1111","http://localhost:24131/api/PayCenterConfig/GetPayCenterConfig?"
+            //  );
             return View();
         }
 
@@ -23,7 +30,19 @@ namespace SyncSoft.HHWebSite.Controllers
         {
             PayCenterRequest request = TestDictionary.GetTestByPartnerId();
             request.PayType = PayEnum;
+            request.Ext_dynamic_id = Request["Ext_dynamic_id"];
             string requestFrom = new PayCenterClient().GetRequestHtml(request);
+
+            return Content(requestFrom);
+        }
+
+
+        public ActionResult Confirm2(PayEnum PayEnum)
+        {
+            PayCenterRequest request = TestDictionary.GetTestByPartnerId();
+            request.PayType = PayEnum;
+            request.Ext_dynamic_id = Request["Ext_dynamic_id"];
+            string requestFrom = new PayCenterClient().GetRequest(request);
 
             return Content(requestFrom);
         }

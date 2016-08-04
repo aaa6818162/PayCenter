@@ -15,21 +15,32 @@ namespace Aop.Api.Request
         public string Code { get; set; }
 
         /// <summary>
-        /// 获取访问令牌的类型，authorization_code表示用授权码换，refresh_token表示用刷新令牌来换。
+        /// 值为authorization_code时，代表用code换取；值为refresh_token时，代表用refresh_token换取
         /// </summary>
         public string GrantType { get; set; }
 
         /// <summary>
-        /// 刷新令牌，上次换取访问令牌时得到。
+        /// 刷新令牌，上次换取访问令牌时得到。见出参的refresh_token字段
         /// </summary>
         public string RefreshToken { get; set; }
 
         #region IAopRequest Members
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
+
+
+		public void SetNeedEncrypt(bool needEncrypt){
+             this.needEncrypt=needEncrypt;
+        }
+
+        public bool GetNeedEncrypt(){
+
+            return this.needEncrypt;
+        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

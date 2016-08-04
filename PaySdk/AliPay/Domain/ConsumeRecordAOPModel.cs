@@ -288,6 +288,12 @@ namespace Aop.Api.Domain
         public string PayChannel { get; set; }
 
         /// <summary>
+        /// 代付人&亲密付人姓名
+        /// </summary>
+        [XmlElement("peerpayer_real_name")]
+        public string PeerpayerRealName { get; set; }
+
+        /// <summary>
         /// 产品码
         /// </summary>
         [XmlElement("product")]

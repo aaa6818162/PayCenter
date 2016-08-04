@@ -14,18 +14,18 @@ namespace Aop.Api.Util
         #region Methods
  
     /// <summary>Extension method which initializes an RSACryptoServiceProvider from a DER public key blob.</summary>
-    public static void LoadPublicKeyDER( this RSACryptoServiceProvider provider, byte[] DERData )
+    public static void LoadPublicKeyDER(  RSACryptoServiceProvider provider, byte[] DERData )
     {
-        byte[] RSAData = GetRSAFromDER( DERData );
-        byte[] publicKeyBlob = GetPublicKeyBlobFromRSA( RSAData );
+        byte[] RSAData = RSACryptoServiceProviderExtension.GetRSAFromDER( DERData );
+        byte[] publicKeyBlob = RSACryptoServiceProviderExtension.GetPublicKeyBlobFromRSA( RSAData );
         provider.ImportCspBlob( publicKeyBlob );
     }
  
     /// <summary>Extension method which initializes an RSACryptoServiceProvider from a PEM public key string.</summary>
-    public static void  LoadPublicKeyPEM( this RSACryptoServiceProvider provider, string sPEM )
+    public static void LoadPublicKeyPEM(  RSACryptoServiceProvider provider, string sPEM )
     {
-        byte[] DERData = GetDERFromPEM( sPEM );
-        provider.LoadPublicKeyDER(DERData );
+        byte[] DERData = RSACryptoServiceProviderExtension.GetDERFromPEM( sPEM );
+        RSACryptoServiceProviderExtension.LoadPublicKeyDER( provider, DERData );
     }
  
     /// <summary>Returns a public key blob from an RSA public key.</summary>
@@ -33,12 +33,12 @@ namespace Aop.Api.Util
     {
         byte[] data = null;
         UInt32 dwCertPublicKeyBlobSize = 0;
-        if ( CryptDecodeObject( CRYPT_ENCODING_FLAGS.X509_ASN_ENCODING | CRYPT_ENCODING_FLAGS.PKCS_7_ASN_ENCODING,
+        if ( RSACryptoServiceProviderExtension.CryptDecodeObject( CRYPT_ENCODING_FLAGS.X509_ASN_ENCODING | CRYPT_ENCODING_FLAGS.PKCS_7_ASN_ENCODING,
             new IntPtr( (int)CRYPT_OUTPUT_TYPES.RSA_CSP_PUBLICKEYBLOB ), RSAData, (UInt32)RSAData.Length, CRYPT_DECODE_FLAGS.NONE,
             data, ref dwCertPublicKeyBlobSize ) )
         {
             data = new byte[ dwCertPublicKeyBlobSize ];
-            if ( !CryptDecodeObject( CRYPT_ENCODING_FLAGS.X509_ASN_ENCODING | CRYPT_ENCODING_FLAGS.PKCS_7_ASN_ENCODING,
+            if ( !RSACryptoServiceProviderExtension.CryptDecodeObject( CRYPT_ENCODING_FLAGS.X509_ASN_ENCODING | CRYPT_ENCODING_FLAGS.PKCS_7_ASN_ENCODING,
                 new IntPtr( (int)CRYPT_OUTPUT_TYPES.RSA_CSP_PUBLICKEYBLOB ), RSAData, (UInt32)RSAData.Length, CRYPT_DECODE_FLAGS.NONE,
                 data, ref dwCertPublicKeyBlobSize ) )
                 throw new Win32Exception( Marshal.GetLastWin32Error() );

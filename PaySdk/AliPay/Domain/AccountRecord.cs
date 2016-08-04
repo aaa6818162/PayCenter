@@ -52,6 +52,12 @@ namespace Aop.Api.Domain
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
+        /// 对方支付宝账号
+        /// </summary>
+        [XmlElement("opt_logon_id")]
+        public string OptLogonId { get; set; }
+
+        /// <summary>
         /// 对方支付宝账户ID
         /// </summary>
         [XmlElement("opt_user_id")]

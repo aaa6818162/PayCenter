@@ -9,6 +9,12 @@ namespace Aop.Api.Response
     public class AlipayTradeWapPayResponse : AopResponse
     {
         /// <summary>
+        /// 表示接口调用是否成功，并不表明业务处理结果。
+        /// </summary>
+        [XmlElement("is_success")]
+        public string IsSuccess { get; set; }
+
+        /// <summary>
         /// 商户网站唯一订单号
         /// </summary>
         [XmlElement("out_trade_no")]

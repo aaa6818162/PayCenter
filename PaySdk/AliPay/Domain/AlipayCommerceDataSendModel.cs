@@ -10,19 +10,19 @@ namespace Aop.Api.Domain
     public class AlipayCommerceDataSendModel : AopObject
     {
         /// <summary>
-        /// 场景的来源渠道，比如场景  在阿里旅行触发，就用alitrip  接入时和支付宝共同确认
+        /// 场景的来源渠道，比如场景  在阿里旅行触发，就用alitrip
         /// </summary>
         [XmlElement("channel")]
         public string Channel { get; set; }
 
         /// <summary>
-        /// 操作码,由支付宝分配
+        /// 操作码
         /// </summary>
         [XmlElement("op_code")]
         public string OpCode { get; set; }
 
         /// <summary>
-        /// 操作数据，如果只需要支付宝这边利用  数据直接完成某个功能（通知），则使  用此参数传输数据.，根据不同的scene_code,  op_code,channel,version共同确定参数是否  可以为空，接入时由支付宝确定参数格式。
+        /// 操作数据，如果只需要支付  宝这边利用数据直接完成某  个功能（通知等），则使用  此参数传输数据.
         /// </summary>
         [XmlElement("op_data")]
         public string OpData { get; set; }
@@ -34,7 +34,7 @@ namespace Aop.Api.Domain
         public string SceneCode { get; set; }
 
         /// <summary>
-        /// 场景的数据表示. json 数组  格式，根据不同的scene_code,  op_code,channel,version共同确定  参数是否可以为空，接入时由支付宝确定  参数格式。
+        /// 场景的数据表示. json 数组  格式
         /// </summary>
         [XmlElement("scene_data")]
         public string SceneData { get; set; }
