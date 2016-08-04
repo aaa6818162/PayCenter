@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Text;
 using Aop.Api.Parser;
@@ -24,7 +25,6 @@ namespace Aop.Api
         public const string TERMINAL_TYPE = "terminal_type";
         public const string TERMINAL_INFO = "terminal_info";
         public const string PROD_CODE = "prod_code";
-        public const string APP_AUTH_TOKEN = "app_auth_token";
 
         private string version;
         private string format;
@@ -47,6 +47,8 @@ namespace Aop.Api
             get { return format != null ? format : "json"; }
             set { format = value; }
         }
+
+        public string AppId { get; set; }
 
         #region DefaultAopClient Constructors
 
@@ -85,9 +87,6 @@ namespace Aop.Api
         #endregion
 
         #region IAopClient Members
-
-
-
         public T Execute<T>(IAopRequest<T> request) where T : AopResponse
         {
             return Execute<T>(request, null);
@@ -95,14 +94,6 @@ namespace Aop.Api
 
         public T Execute<T>(IAopRequest<T> request, string accessToken) where T : AopResponse
         {
-
-            return Execute<T>(request, accessToken, null);
-        }
-
-        public T Execute<T>(IAopRequest<T> request, string accessToken, string appAuthToken) where T : AopResponse
-        {
-
-
             AlipayMobilePublicMultiMediaDownloadRequest multiMediaDownloadRequest = ((AlipayMobilePublicMultiMediaDownloadRequest)request);
             // 添加协议级请求参数
             AopDictionary txtParams = new AopDictionary(request.GetParameters());
@@ -117,20 +108,13 @@ namespace Aop.Api
             txtParams.Add(TERMINAL_INFO, request.GetTerminalInfo());
             txtParams.Add(PROD_CODE, request.GetProdCode());
 
-            if (!string.IsNullOrEmpty(appAuthToken))
-            {
-                txtParams.Add(APP_AUTH_TOKEN, appAuthToken);
-            }
-
-
             // 添加签名参数
-            txtParams.Add(SIGN, AopUtils.SignAopRequest(txtParams, privateKeyPem, charset,signType));
+            txtParams.Add(SIGN, AopUtils.SignAopRequest(txtParams, privateKeyPem,charset));
 
             Stream outStream = multiMediaDownloadRequest.stream;
             AopResponse rsp = DoGet(txtParams, outStream);
 
             return (T)rsp;
-
         }
 
         #endregion
@@ -139,17 +123,21 @@ namespace Aop.Api
         {
             AlipayMobilePublicMultiMediaDownloadResponse response = null;
 
+            if(string.IsNullOrEmpty(charset)){
+                charset = "UTF-8";
+            }
+
             string url = this.serverUrl;
             System.Console.WriteLine(url);
             if (parameters != null && parameters.Count > 0)
             {
                 if (url.Contains("?"))
                 {
-                    url = url + "&" + WebUtils.BuildQuery(parameters,charset);
+                    url = url + "&" + WebUtils.BuildQuery(parameters, charset);
                 }
                 else
                 {
-                    url = url + "?" + WebUtils.BuildQuery(parameters,charset);
+                    url = url + "?" + WebUtils.BuildQuery(parameters, charset);
                 }
             }
 
@@ -162,10 +150,12 @@ namespace Aop.Api
                 if (rsp.ContentType.ToLower().Contains("text/plain"))
                 {
                     Encoding encoding = Encoding.GetEncoding(rsp.CharacterSet);
-                    string body = webUtils.GetResponseAsString(rsp,encoding);
+                    string body = webUtils.GetResponseAsString(rsp, encoding);
                     IAopParser<AlipayMobilePublicMultiMediaDownloadResponse> tp = new AopJsonParser<AlipayMobilePublicMultiMediaDownloadResponse>();
-                    response = tp.Parse(body, charset);
-                }else{
+                    response = tp.Parse(body,charset);
+                }
+                else
+                {
                     GetResponseAsStream(outStream, rsp);
                     response = new AlipayMobilePublicMultiMediaDownloadResponse();
                 }
@@ -193,18 +183,8 @@ namespace Aop.Api
                 reader = new StreamReader(stream);
 
                 writer = new BinaryWriter(outStream);
+                CopyTo(stream, outStream);
 
-                //stream.CopyTo(outStream);
-                int length = Convert.ToInt32(rsp.ContentLength);
-                byte[] buffer = new byte[length];
-                int rc = 0; 
-                while ((rc=stream.Read(buffer, 0, length)) > 0)
-                {
-                    outStream.Write(buffer, 0, rc);
-                }
-                outStream.Flush();
-                outStream.Close();
-                
             }
             finally
             {
@@ -215,14 +195,41 @@ namespace Aop.Api
             }
         }
 
-        public T pageExecute<T>(IAopRequest<T> request) where T : AopResponse
+        public void CopyTo(Stream fromStream, Stream toStream)
         {
-            throw new NotImplementedException();
+            if (toStream == null)
+            {
+                throw new ArgumentNullException("toStream为空");
+            }
+            if (!fromStream.CanRead && !fromStream.CanWrite)
+            {
+                throw new ArgumentNullException("输入流不能读，并且输出流不能写");
+            }
+            if (!toStream.CanRead && !toStream.CanWrite)
+            {
+                throw new ArgumentNullException("输出流不能读，并且输出流不能写");
+            }
+            if (!fromStream.CanRead)
+            {
+                throw new ArgumentNullException("输入流不能读");
+            }
+            if (!toStream.CanWrite)
+            {
+                throw new ArgumentNullException("输出流不能写");
+            }
+
+            this.InternalCopyTo(fromStream, toStream, 4096);
         }
 
-        public T pageExecute<T>(IAopRequest<T> request, string session, string reqMethod) where T : AopResponse
+        private void InternalCopyTo(Stream fromStream, Stream destination, int bufferSize)
         {
-            throw new NotImplementedException();
+            byte[] array = new byte[bufferSize];
+            int count;
+            while ((count = fromStream.Read(array, 0, array.Length)) != 0)
+            {
+                destination.Write(array, 0, count);
+            }
         }
+
     }
 }

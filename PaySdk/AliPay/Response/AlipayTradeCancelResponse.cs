@@ -9,7 +9,7 @@ namespace Aop.Api.Response
     public class AlipayTradeCancelResponse : AopResponse
     {
         /// <summary>
-        /// 本次撤销触发的交易动作  close：关闭交易，无退款  refund：产生了退款
+        /// 本次撤销触发的交易动作
         /// </summary>
         [XmlElement("action")]
         public string Action { get; set; }

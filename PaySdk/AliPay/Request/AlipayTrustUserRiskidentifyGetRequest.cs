@@ -10,27 +10,16 @@ namespace Aop.Api.Request
     public class AlipayTrustUserRiskidentifyGetRequest : IAopRequest<AlipayTrustUserRiskidentifyGetResponse>
     {
         /// <summary>
-        /// 行业关注名单类型，具体类型见对接文档或样例代码
+        /// 风险名单类型，具体类型见对接文档或样例代码
         /// </summary>
         public string Type { get; set; }
 
         #region IAopRequest Members
-		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
-
-
-		public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
-        }
-
-        public bool GetNeedEncrypt(){
-
-            return this.needEncrypt;
-        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

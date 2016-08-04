@@ -23,44 +23,26 @@ namespace Aop.Api.Response
         public string BuyerLogonId { get; set; }
 
         /// <summary>
-        /// 买家实付金额，单位为元，两位小数。
+        /// 买家实付金额
         /// </summary>
         [XmlElement("buyer_pay_amount")]
         public string BuyerPayAmount { get; set; }
 
         /// <summary>
-        /// 买家在支付宝的用户id
-        /// </summary>
-        [XmlElement("buyer_user_id")]
-        public string BuyerUserId { get; set; }
-
-        /// <summary>
-        /// 本次交易支付所使用的单品券优惠的商品优惠信息
-        /// </summary>
-        [XmlElement("discount_goods_detail")]
-        public string DiscountGoodsDetail { get; set; }
-
-        /// <summary>
-        /// 交易支付使用的资金渠道
+        /// 资金单据信息的集合
         /// </summary>
         [XmlArray("fund_bill_list")]
         [XmlArrayItem("trade_fund_bill")]
         public List<TradeFundBill> FundBillList { get; set; }
 
         /// <summary>
-        /// 行业特殊信息（例如在医保卡支付业务中，向用户返回医疗信息）。
-        /// </summary>
-        [XmlElement("industry_sepc_detail")]
-        public string IndustrySepcDetail { get; set; }
-
-        /// <summary>
-        /// 交易中用户支付的可开具发票的金额，单位为元，两位小数。
+        /// 交易中用户支付的可开具发票的金额
         /// </summary>
         [XmlElement("invoice_amount")]
         public string InvoiceAmount { get; set; }
 
         /// <summary>
-        /// 买家支付宝用户号，该字段将废弃，不要使用
+        /// 买家支付宝用户号
         /// </summary>
         [XmlElement("open_id")]
         public string OpenId { get; set; }
@@ -72,13 +54,13 @@ namespace Aop.Api.Response
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 积分支付的金额，单位为元，两位小数。
+        /// 积分支付的金额
         /// </summary>
         [XmlElement("point_amount")]
         public string PointAmount { get; set; }
 
         /// <summary>
-        /// 实收金额，单位为元，两位小数。
+        /// 实收金额
         /// </summary>
         [XmlElement("receipt_amount")]
         public string ReceiptAmount { get; set; }
@@ -96,19 +78,13 @@ namespace Aop.Api.Response
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 请求交易支付中的商户店铺的名称
-        /// </summary>
-        [XmlElement("store_name")]
-        public string StoreName { get; set; }
-
-        /// <summary>
         /// 商户机具终端编号
         /// </summary>
         [XmlElement("terminal_id")]
         public string TerminalId { get; set; }
 
         /// <summary>
-        /// 交易的订单金额，单位为元，两位小数。
+        /// 交易的订单金额
         /// </summary>
         [XmlElement("total_amount")]
         public string TotalAmount { get; set; }
@@ -120,7 +96,7 @@ namespace Aop.Api.Response
         public string TradeNo { get; set; }
 
         /// <summary>
-        /// 交易状态：WAIT_BUYER_PAY（交易创建，等待买家付款）、TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）、TRADE_SUCCESS（交易支付成功）、TRADE_FINISHED（交易结束，不可退款）
+        /// 交易状态
         /// </summary>
         [XmlElement("trade_status")]
         public string TradeStatus { get; set; }

@@ -35,11 +35,6 @@ namespace Aop.Api.Request
         public string ExternalCardNo { get; set; }
 
         /// <summary>
-        /// ALIPAY：支付宝  PARTNER：商户  PLATFORM：平台商
-        /// </summary>
-        public string IssuerType { get; set; }
-
-        /// <summary>
         /// 商户会员卡会员等级
         /// </summary>
         public string Level { get; set; }
@@ -60,22 +55,11 @@ namespace Aop.Api.Request
         public string RequestFrom { get; set; }
 
         #region IAopRequest Members
-		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
-
-
-		public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
-        }
-
-        public bool GetNeedEncrypt(){
-
-            return this.needEncrypt;
-        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;
@@ -130,7 +114,6 @@ namespace Aop.Api.Request
             parameters.Add("card_merchant_info", this.CardMerchantInfo);
             parameters.Add("ext_info", this.ExtInfo);
             parameters.Add("external_card_no", this.ExternalCardNo);
-            parameters.Add("issuer_type", this.IssuerType);
             parameters.Add("level", this.Level);
             parameters.Add("orrur_time", this.OrrurTime);
             parameters.Add("point", this.Point);

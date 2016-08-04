@@ -21,17 +21,6 @@ namespace Aop.Api.Request
         void SetNotifyUrl(string notifyUrl);
 
         /// <summary>
-        /// 设置请求是否需要加密
-        /// </summary>
-        void SetNeedEncrypt(bool needEncrypt);
-
-        /// <summary>
-        /// 获取AOP请求是否需要加密
-        /// </summary>
-        /// <returns>结果是否加密</returns>
-        bool GetNeedEncrypt();
-
-        /// <summary>
         /// 获取AOP的API名称。
         /// </summary>
         /// <returns>API名称</returns>

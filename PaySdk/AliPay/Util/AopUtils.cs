@@ -8,23 +8,10 @@ using Jayrock.Json.Conversion;
 namespace Aop.Api.Util
 {
     /// <summary>
-    public abstract class AopUtils
-    {    /// AOP系统工具类。
+    /// AOP系统工具类。
     /// </summary>
-
-
-        /// <summary>m>
-        /// <param name="bizContent"></param>
-        /// <param name="charset"></param>
-        ///  AES加密
-        /// </summary>
-        /// <param name="encryptKey"></para
-        /// <returns></returns>
-        public static string AesEncrypt(string encryptKey, string bizContent, string charset)
-        {
-            return AlipayEncrypt.AesEncrypt(encryptKey, bizContent, charset);
-
-        }
+    public abstract class AopUtils
+    {
 
         /// <summary>
         /// 给AOP请求签名。
@@ -33,17 +20,15 @@ namespace Aop.Api.Util
         /// <param name="parameters">所有字符型的AOP请求参数</param>
         /// <param name="privateKeyPem">签名密钥</param>
         /// <returns>签名</returns>
-        public static string SignAopRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, string signType)
+        public static string SignAopRequest(IDictionary<string, string> parameters, string privateKeyPem,string charset)
         {
-            return AlipaySignature.RSASign(parameters, privateKeyPem, charset, signType);
+            return AlipaySignature.RSASign(parameters, privateKeyPem,charset);
         }
 
-        public static string SignAopRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, bool keyFromFile,string signType)
+        public static string SignAopRequest(IDictionary<string, string> parameters, RSACryptoServiceProvider privateKeyPem, string charset)
         {
-            return AlipaySignature.RSASign(parameters, privateKeyPem, charset, keyFromFile,signType);
+            return AlipaySignature.RSASign(parameters, privateKeyPem, charset);
         }
-
-
         /// <summary>
         /// 清除字典中值为空的项。
         /// </summary>

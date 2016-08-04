@@ -30,12 +30,12 @@ namespace Aop.Api.Request
         public string OrderFrom { get; set; }
 
         /// <summary>
-        /// 订单状态，为空查询所有状态订单。例如：等待买家付款（WAIT_BUYER_PAY），等待卖家发货（WAIT_SELLER_SEND_GOODS），等待买家确认收货（WAIT_BUYER_CONFIRM_GOODS），交易完成（TRADE_FINISHED），交易关闭（TRADE_CLOSED），交易成功（TRADE_SUCCESS）
+        /// 订单状态，为空查询所有状态订单
         /// </summary>
         public string OrderStatus { get; set; }
 
         /// <summary>
-        /// 订单类型，为空查询所有类型订单。例如：交易（TRADE）,CAE代扣（CAE）,代付（PEERPAY）,转账到卡（TRANSFER）
+        /// 订单类型，为空查询所有类型订单。
         /// </summary>
         public string OrderType { get; set; }
 
@@ -55,22 +55,11 @@ namespace Aop.Api.Request
         public string StartTime { get; set; }
 
         #region IAopRequest Members
-		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
-
-
-		public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
-        }
-
-        public bool GetNeedEncrypt(){
-
-            return this.needEncrypt;
-        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

@@ -23,25 +23,13 @@ namespace Aop.Api.Response
         public string BuyerPayAmount { get; set; }
 
         /// <summary>
-        /// 买家在支付宝的用户id
-        /// </summary>
-        [XmlElement("buyer_user_id")]
-        public string BuyerUserId { get; set; }
-
-        /// <summary>
         /// 支付宝卡余额
         /// </summary>
         [XmlElement("card_balance")]
         public string CardBalance { get; set; }
 
         /// <summary>
-        /// 本次交易支付所使用的单品券优惠的商品优惠信息
-        /// </summary>
-        [XmlElement("discount_goods_detail")]
-        public string DiscountGoodsDetail { get; set; }
-
-        /// <summary>
-        /// 交易支付使用的资金渠道
+        /// 交易支付使用的资金单据列表
         /// </summary>
         [XmlArray("fund_bill_list")]
         [XmlArrayItem("trade_fund_bill")]
@@ -60,7 +48,7 @@ namespace Aop.Api.Response
         public string InvoiceAmount { get; set; }
 
         /// <summary>
-        /// 买家支付宝用户号,该参数已废弃，请不要使用。
+        /// 买家支付宝用户号
         /// </summary>
         [XmlElement("open_id")]
         public string OpenId { get; set; }
@@ -78,7 +66,7 @@ namespace Aop.Api.Response
         public string PointAmount { get; set; }
 
         /// <summary>
-        /// 实收金额
+        /// 88.88
         /// </summary>
         [XmlElement("receipt_amount")]
         public string ReceiptAmount { get; set; }

@@ -1,5 +1,4 @@
 using System;
-using Aop.Api.Domain;
 using System.Collections.Generic;
 using Aop.Api.Response;
 
@@ -11,27 +10,16 @@ namespace Aop.Api.Request
     public class AlipayTradePayRequest : IAopRequest<AlipayTradePayResponse>
     {
         /// <summary>
-        /// 用于在线下场景交易一次创建并支付掉  修改路由策略到R
+        /// 统一收单支付业务请求
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
-		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
-
-
-		public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
-        }
-
-        public bool GetNeedEncrypt(){
-
-            return this.needEncrypt;
-        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;

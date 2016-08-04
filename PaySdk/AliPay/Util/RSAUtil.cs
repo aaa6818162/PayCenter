@@ -20,7 +20,7 @@ namespace Aop.Api.Util
         /// <returns></returns>
         public static string RSASign(string data, string privateKeyPem, string charset)
         {
-            return AlipaySignature.RSASign(data, privateKeyPem, charset,"RSA");
+            return AlipaySignature.RSASign(data, privateKeyPem, charset);
         }
 
     }

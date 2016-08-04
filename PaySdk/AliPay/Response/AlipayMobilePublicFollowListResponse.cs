@@ -28,12 +28,6 @@ namespace Aop.Api.Response
         public Data Data { get; set; }
 
         /// <summary>
-        /// 与nextUserId对应，标准Alipay UserId
-        /// </summary>
-        [XmlElement("next_alipay_user_id")]
-        public string NextAlipayUserId { get; set; }
-
-        /// <summary>
         /// 查询分组的userid
         /// </summary>
         [XmlElement("next_user_id")]

@@ -9,13 +9,13 @@ namespace Aop.Api.Response
     public class AlipaySystemOauthTokenResponse : AopResponse
     {
         /// <summary>
-        /// 访问令牌。通过该令牌调用需要授权类接口
+        /// 访问令牌
         /// </summary>
         [XmlElement("access_token")]
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// 已废弃，请勿使用
+        /// 支付宝用户的id，默认不返回
         /// </summary>
         [XmlElement("alipay_user_id")]
         public string AlipayUserId { get; set; }
@@ -33,15 +33,9 @@ namespace Aop.Api.Response
         public string ReExpiresIn { get; set; }
 
         /// <summary>
-        /// 刷新令牌。通过该令牌可以刷新access_token
+        /// 刷新令牌
         /// </summary>
         [XmlElement("refresh_token")]
         public string RefreshToken { get; set; }
-
-        /// <summary>
-        /// 支付宝用户的唯一userId
-        /// </summary>
-        [XmlElement("user_id")]
-        public string UserId { get; set; }
     }
 }

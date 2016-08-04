@@ -10,18 +10,6 @@ namespace Aop.Api.Domain
     public class ZhimaRiskDetail : AopObject
     {
         /// <summary>
-        /// 数据类型：Negative(负面信息)、Risk(风险信息) 。系统会将在APP上对C端披露的信息标记为负面信息，其余的信息标记为风险信息。
-        /// </summary>
-        [XmlElement("data_type")]
-        public string DataType { get; set; }
-
-        /// <summary>
-        /// 对于该条风险信息的补充信息。是名称和值得键值对。依据不同的风险类型，存在不同内容。返回信息为JSON字符串。
-        /// </summary>
-        [XmlElement("extendinfo")]
-        public string Extendinfo { get; set; }
-
-        /// <summary>
         /// 风险代码
         /// </summary>
         [XmlElement("risk_code")]
@@ -52,7 +40,7 @@ namespace Aop.Api.Domain
         public string Status { get; set; }
 
         /// <summary>
-        /// 行业类型
+        /// 名单类型
         /// </summary>
         [XmlElement("type")]
         public string Type { get; set; }

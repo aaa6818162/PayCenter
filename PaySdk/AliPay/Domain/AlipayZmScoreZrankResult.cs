@@ -10,7 +10,7 @@ namespace Aop.Api.Domain
     public class AlipayZmScoreZrankResult : AopObject
     {
         /// <summary>
-        /// 芝麻分分段 Z0-Z7
+        /// 芝麻分分段 Z1-Z7
         /// </summary>
         [XmlElement("zrank")]
         public string Zrank { get; set; }

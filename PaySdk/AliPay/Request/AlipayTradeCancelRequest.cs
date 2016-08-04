@@ -1,5 +1,4 @@
 using System;
-using Aop.Api.Domain;
 using System.Collections.Generic;
 using Aop.Api.Response;
 
@@ -11,27 +10,16 @@ namespace Aop.Api.Request
     public class AlipayTradeCancelRequest : IAopRequest<AlipayTradeCancelResponse>
     {
         /// <summary>
-        /// 统一收单交易撤销接口
+        /// 业务请求接口的参数体，JSON格式，具体包含的内容参见各个接口的请求参数
         /// </summary>
         public string BizContent { get; set; }
 
         #region IAopRequest Members
-		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
 		private string terminalType;
 		private string terminalInfo;
         private string prodCode;
 		private string notifyUrl;
-
-
-		public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
-        }
-
-        public bool GetNeedEncrypt(){
-
-            return this.needEncrypt;
-        }
 
 		public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;
