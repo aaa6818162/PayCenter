@@ -37,7 +37,7 @@ namespace PayCenterSdk
         /// <summary>
         /// 支付完成时间
         /// </summary>
-        public DateTime PayTime { get; set; }
+        public string PayTime { get; set; }
 
         /// <summary>
         /// 支付是否成功

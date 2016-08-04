@@ -7,6 +7,7 @@ using Com.Alipay.Model;
 using SyncSoft.Payment.Business.Biz.Base;
 using SyncSoft.Payment.Business.Interface;
 using SyncSoft.Payment.Business.Interface.App;
+using SyncSoft.Payment.Domain.Response;
 using SyncSoft.Payment.Model.Config;
 
 namespace SyncSoft.Payment.Business.Biz.App
@@ -18,7 +19,7 @@ namespace SyncSoft.Payment.Business.Biz.App
     {
         #region Implementation of IAliPayAppBiz
 
-        public void tradePay(string dynamic_id)
+        public ThirdPayResponse tradePay(string dynamic_id)
         {
             var config = new AlipayAppConfig();
             var _serviceClient = F2FBiz.CreateClientInstance(config.serverUrl,
@@ -27,10 +28,20 @@ namespace SyncSoft.Payment.Business.Biz.App
                    config.version,
                    config.sign_type, config.alipay_public_key, config.charset);
 
-          var builder=  BuildPayContent(dynamic_id);
+            var builder = BuildPayContent(dynamic_id);
 
-            AlipayF2FPayResult payResult = _serviceClient.tradePay(builder);
+            var result = _serviceClient.tradePay(builder);
 
+
+            return new ThirdPayResponse()
+            {
+                OrderNo = result.response.OutTradeNo,
+                ThridPaySerialNo = result.response.TradeNo,
+                TotalAmount = result.response.TotalAmount,
+                PayTime = result.response.GmtPayment,
+                IsSuccess = result.Status == ResultEnum.SUCCESS,
+                ErrorMsg=result.response.Body
+            };
         }
 
         public void tradeQuery(string outTradeNo)

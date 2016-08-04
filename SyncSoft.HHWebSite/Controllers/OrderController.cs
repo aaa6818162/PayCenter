@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using PayCenterSdk;
 using PayCenterSdk.Model;
 
@@ -30,7 +31,6 @@ namespace SyncSoft.HHWebSite.Controllers
         {
             PayCenterRequest request = TestDictionary.GetTestByPartnerId();
             request.PayType = PayEnum;
-            request.Ext_dynamic_id = Request["Ext_dynamic_id"];
             string requestFrom = new PayCenterClient().GetRequestHtml(request);
 
             return Content(requestFrom);
@@ -44,7 +44,20 @@ namespace SyncSoft.HHWebSite.Controllers
             request.Ext_dynamic_id = Request["Ext_dynamic_id"];
             string requestFrom = new PayCenterClient().GetRequest(request);
 
-            return Content(requestFrom);
+            var result = JsonConvert.DeserializeObject<PayCenterResponse>(requestFrom);
+
+            if (!result.IsSuccess)
+            {
+                return RedirectToAction("Fail", "Pay");
+            }
+            return RedirectToAction("Success", "Pay");
         }
+
+
+        public ActionResult Confirm3()
+        {
+            return RedirectToAction("Success", "Pay");
+        }
+
     }
 }

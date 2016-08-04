@@ -10,6 +10,7 @@ using SyncSoft.Payment;
 using SyncSoft.Payment.Business.Biz;
 using SyncSoft.Payment.Business.Biz.App;
 using SyncSoft.Payment.Business.Biz.FApp;
+using SyncSoft.Payment.Business.Interface;
 using SyncSoft.Payment.Business.Interface.Base;
 using SyncSoft.Payment.Domain.Request;
 using SyncSoft.Payment.IOC;
@@ -23,7 +24,7 @@ namespace SyncSoft.PayCenter.Controllers
 {
     public class PortalController : Controller
     {
-
+        ILogBiz log = new LogBiz();
         public ActionResult Pay()
         {
             return View();
@@ -44,14 +45,23 @@ namespace SyncSoft.PayCenter.Controllers
             request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
             var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
 
+            log.LogInfo(requestFrom);
+
             return Content(requestFrom);
             return View();
         }
 
+        /// <summary>
+        /// 这里到时候拆分成移动支付 和pc支付
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Index()
         {
+
             var payCenterRequest = new PayCenterServer().GetRequest();
+
+            log.LogInfo(payCenterRequest);
 
             var validateResult = payCenterRequest.Validate();
             if (!validateResult.Item1)
@@ -81,10 +91,22 @@ namespace SyncSoft.PayCenter.Controllers
             }
             else
             {
-                if (payCenterRequest.PayType==PayEnum.AlipayTM)
+
+                if (payCenterRequest.PayType == PayEnum.AlipayTM)
                 {
 
-                    new AliPayAppBiz().tradePay(Request["Ext_dynamic_id"]);
+                    var result = new AliPayAppBiz().tradePay(Request["Ext_dynamic_id"]);
+                    var payCenterResponse = new PayCenterResponse();
+                    payCenterResponse.Partner = "111";
+                    payCenterResponse.OrderNo = result.OrderNo;
+                    payCenterResponse.PayType = PayEnum.AlipayTM;
+                    payCenterResponse.ThridPaySerialNumber = result.ThridPaySerialNo;
+                    payCenterResponse.PayCenterSerialNumber = DateTime.Now.ToString();
+                    payCenterResponse.PayTime = result.PayTime;
+                    payCenterResponse.IsSuccess = result.IsSuccess;
+   
+                    return Content(JsonConvert.SerializeObject(payCenterResponse));
+
                 }
                 else
                 {
@@ -101,10 +123,6 @@ namespace SyncSoft.PayCenter.Controllers
                     var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
                     return Content(requestFrom);
                 }
-
-
-
-               
 
                 return View();
             }
@@ -177,7 +195,7 @@ namespace SyncSoft.PayCenter.Controllers
             payCenterResponse.PayType = PayEnum.Alipay;
             payCenterResponse.ThridPaySerialNumber = entity.trade_no;
             payCenterResponse.PayCenterSerialNumber = DateTime.Now.ToString();
-            payCenterResponse.PayTime = DateTime.Now;
+            payCenterResponse.PayTime = DateTime.Now.ToString();
             payCenterResponse.IsSuccess = entity.IsSuccess;
             payCenterResponse.PayCenterConfig = PayCenterSdk.DataAccessClient.GetPayCenterConfig();
             string requestFrom = new PayCenterServer().GetResponseHtml(payCenterResponse);
