@@ -43,7 +43,8 @@ namespace SyncSoft.PayCenter.Controllers
             request.TotalFee = payCenterRequest.TotalFee;
             request.SubmitTime = payCenterRequest.SubmitTime;
             request.PartnerPayConfig.AlipayConfig = SyncSoft.Payment.DataAccess.GetAlipayConfig();
-            var requestFrom = Container.Resolve<IBasePayBiz>(payCenterRequest.PayType.ToString()).GetRequestHtml(request);
+
+            var requestFrom = Container.Resolve<IBasePayBiz>(PayType.ToString()).GetRequestHtml(request);
 
             log.LogInfo(requestFrom);
 

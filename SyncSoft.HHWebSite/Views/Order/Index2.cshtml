@@ -14,15 +14,23 @@
     <div>
         @using (Html.BeginForm("Confirm2", "Order", FormMethod.Post))
         {
-            <select name="PayEnum">
+            <div>
+                <select name="PayEnum">
 
-                <option value="AlipayTM">支付宝扫码</option>
-                <option value="AlipayEW">支付宝二维码</option>
-            </select>
+                    <option value="AlipayTM">支付宝扫码</option>
+                    <option value="AlipayEW">支付宝二维码</option>
+                </select>
 
-            <input type="text" value="" name="Ext_dynamic_id" />
+                当面付2.0 条码支付
+                当面付2.0 二维码支付
+                当面付2.0 订单查询
+                当面付2.0 订单退款
+                当面付2.0 二维码支付异步通知（扫码支付如果选择异步通知时参考）
 
-            <input type="submit" id="btnSubmit" value="确认订单" />
+                <input type="text" value="" name="Ext_dynamic_id" />
+
+                <input type="submit" id="btnSubmit" value="确认订单" />
+            </div>
         }
     </div>
     @*<script type="text/javascript">
